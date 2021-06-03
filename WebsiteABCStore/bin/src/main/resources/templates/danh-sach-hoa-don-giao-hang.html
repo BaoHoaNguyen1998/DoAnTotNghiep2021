@@ -1,0 +1,184 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="utf-8">
+<title>ABC Store</title>
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+	<!-- Main Wrapper Start Here -->
+	<div class="wrapper">
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a th:href="@{/}">Trang Chủ</a></li>
+						<li class="active"><a
+							th:href="@{/khach-hang/hoa-don/hoa-don-giao-hang}">Hóa Đơn</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+
+
+
+		<div class="main-shop-page pt-100 pb-100 ptb-sm-60">
+			<div class="container">
+
+				<div class="row">
+					<div th:replace="/bocuc/nav_left2 :: nav_left2"></div>
+
+					<div class="col-lg-9 order-1 order-lg-2">
+
+
+						<div class="tab-content tab-transparent-content">
+							<div class="tab-pane fade show active" id="business-1"
+								role="tabpanel" aria-labelledby="business-tab">
+								<div class="col-lg-12 grid-margin stretch-card">
+									<div class="card">
+										<div class="card-body">
+											<h4 class="card-title">Danh sách đơn hàng đang được
+												giao.</h4>
+
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>Mã Đơn Hàng</th>
+														<th>Ngày Lập</th>
+														<th>Khách Hàng</th>
+														<th>Tổng Tiền</th>
+														<th>Trạng Thái</th>
+														<th>Tùy Chọn</th>
+													</tr>
+												</thead>
+
+												<th:block th:each="hoaDon : ${listHoaDon}">
+													<tr>
+														<td><a style="font-size: 10px"
+															th:href="@{/quan-ly/don-hang/{id}(id=${hoaDon.id})}"
+															th:text="${hoaDon.id}"></a></td>
+														<td><span class="price" style="font-size: 10px"
+															th:text="${hoaDon.ngayLap}"></span></td>
+														<td><span class="price" style="font-size: 10px"
+															th:text="${hoaDon.nguoiDung.hoTen}"></span></td>
+														<td><span class="price" style="font-size: 10px"
+															th:text="${hoaDon.tongTien}"></span></td>
+														<td><span class="price" style="font-size: 10px"
+															th:text="${hoaDon.trangThai}"></span></td>
+														
+														<td><a onclick="return confirm('Bạn có chắc rằng muốn hủy đơn hàng này ?');"
+															th:href="@{/khach-hang/hoa-don/huy-don-hang/{id}(id=${hoaDon.id})}">Hủy</a></td>
+
+
+													</tr>
+												</th:block>
+
+											</table>
+										</div>
+										<div class="row">
+											<div class="col-12 grid-margin">
+												<div class="container">
+													<form th:action="@{/quan-ly/hoa-don/hoa-don-giao-hang}"
+														method="get" id="formSubmit">
+														<div class="container">
+															<ul class="pagination" id="pagination"></ul>
+															<input type="hidden" value="" id="page" name="page" />
+														</div>
+
+													</form>
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+
+								</div>
+
+
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 grid-margin">
+								<div class="container">
+									<div class="pro-pagination">
+										<table>
+											<tr class="blog-pagination">
+
+
+												<td class="page-item" th:each="pageNumber : ${pageNumbers}"><a
+													class="page-link"
+													th:href="@{/quan-ly/hoa-don/hoa-don-giao-hang(page=${pageNumber})}"
+													th:text=${pageNumber}></a></td>
+											</tr>
+										</table>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Row End -->
+					</div>
+
+					<!-- #grid view End -->
+
+
+					<!-- Product Pagination Info -->
+				</div>
+				<!-- Grid & List Main Area End -->
+			</div>
+		</div>
+		<!-- product Categorie List End -->
+	</div>
+	<!-- Row End -->
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+
+
+	<!-- Main Wrapper End Here -->
+
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+
+
+	<script type="text/javascript">
+	
+var currentPage = [[$,{currentPage}]];
+	
+	$(function() {
+		window.pagObj = $('#pagination').twbsPagination({
+			totalPages : [[$,{totalPage}]],
+			visiblePages : 10,
+			startPage: currentPage,
+			onPageClick : function(event, page) {
+				if (currentPage != page) {
+					$('#page').val(page);
+					$('#formSubmit').submit();
+				}
+			}
+		})
+	});
+	
+	
+
+</script>
+</body>
+
+</html>

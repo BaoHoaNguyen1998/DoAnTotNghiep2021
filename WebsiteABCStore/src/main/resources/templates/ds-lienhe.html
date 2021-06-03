@@ -1,0 +1,260 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<link rel="stylesheet"
+	href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+<script type="text/javascript" th:src="@{js/bottom.css}"
+	src="../static/js/bottom.css"></script>
+<script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{js/main.js}"
+	src="../static/js/main.js"></script>
+<script type="text/javascript"
+	src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+
+<head>
+<meta charset="utf-8">
+<title>Trang Chủ || ABC Store</title>
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+	<!-- Main Wrapper Start Here -->
+	<div class="wrapper">
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a th:href="@{/}">Trang Chủ</a></li>
+						<li class="active"><a th:href="@{/tai-khoan/dia-chi}">Danh
+								Sách Địa Chỉ</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+
+
+		<!-- Breadcrumb End -->
+		<!-- Shop Page Start -->
+		<div class="main-shop-page pt-100 pb-100 ptb-sm-60">
+			<div class="container">
+				<!-- Row End -->
+				<div class="row">
+
+
+					<div th:replace="/bocuc/nav_left_tai_khoan :: nav_left_tai_khoan"></div>
+					<div class="col-lg-10 col-md-10 col-sm-10 col-10">
+						<div class="ship-different-title">
+							<h5>
+								<button id="ship-box" class="return-customer-btn">Thêm
+									Liên Hệ Chỉ Mới</button>
+
+							</h5>
+						</div>
+						<form class="form-register" action="#"
+							th:action="@{/tai-khoan/dia-chi/them-dia-chi-moi}"
+							th:object="${lienHeMoi}" method="GET">
+
+							<div id="ship-box-info">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="checkout-form-list mb-30">
+											<label>Họ Tên Khách Hàng</label> <input type="text"
+												th:field="*{hoTen}"
+												placeholder="Vui lòng nhập họ tên khách hàng ..." />
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="checkout-form-list mb-30">
+											<label>Địa Chỉ</label> <input type="text"
+												th:field="*{diaChi}"
+												placeholder="Vui lòng nhập số địa chỉ ..." />
+										</div>
+									</div>
+
+
+									<div class="col-md-12">
+										<div class="checkout-form-list mb-30">
+											<label>Số Điện Thoại <span class="required">*</span></label>
+											<input type="text" th:field="*{soDienThoai}"
+												placeholder="Vui lòng nhập số điện thoại..." />
+										</div>
+									</div>
+
+									<div class="col-md-12">
+
+										<input type="submit" value="Thêm địa chỉ mới"
+											class="return-customer-btn">
+
+									</div>
+								</div>
+							</div>
+						</form>
+
+
+
+
+
+
+						<br>
+						<hr>
+						<br>
+
+						<div class="container">
+							<h2>Danh Sách Địa Chỉ Của Bạn</h2>
+							<th:block th:each="lienHe : ${listSanPham}">
+								<div class="container" style="margin-top: 30px">
+									<div class="row">
+
+										<span hidden="hiden" style="font-size: 15px"
+											th:text="${lienHe.id}"></span>
+
+										<div class="col-md-2" style="margin-top: 30px">
+											<h4>
+												<span class="price" style="font-size: 15px"
+													th:text="${lienHe.diaChi}"></span>
+
+
+											</h4>
+										</div>
+
+										<div class="col-md-2" style="margin-top: 30px">
+											<h4>
+												<span class="price" style="font-size: 15px"
+													th:text="${lienHe.soDienThoai}"></span>
+											</h4>
+										</div>
+										<div class="col-md-2" style="margin-top: 10px" id="myBtn">
+
+											<a
+												th:href="@{/tai-khoan/dia-chi/sua-dia-chi/{id}(id=${lienHe.id})}"
+												class="customer-btn" type="submit" style="width: 160px;">Sữa
+												Liên Hệ</a>
+
+										</div>
+
+
+
+										<div class="col-md-2" style="margin-top: 10px">
+											<a class="return-customer-btn " style="width: 160px;"
+												type="submit"
+												onclick="return confirm('Bạn có chắc rằng xóa địa chỉ này ?');"
+												th:href="@{/tai-khoan/dia-chi/xoa-dia-chi/{id}(id=${lienHe.id})}">Xóa
+												Liên Hệ</a>
+
+										</div>
+									</div>
+								</div>
+							</th:block>
+
+							<div class="container">
+								<div class="pro-pagination">
+									<ul class="blog-pagination">
+
+
+										<li class="page-item" th:each="pageNumber : ${pageNumbers}"><a
+											class="page-link"
+											th:href="@{/tai-khoan/lien-he(page=${pageNumber})}"
+											th:text=${pageNumber}></a></li>
+
+
+									</ul>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+
+
+
+
+
+
+			<!-- Product Pagination Info -->
+		</div>
+		<!-- Grid & List Main Area End -->
+	</div>
+
+
+
+
+
+
+
+
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+
+
+	<!-- Main Wrapper End Here -->
+
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+
+	<script type="text/javascript">
+		function show(input) {
+			debugger;
+			var validExtensions = [ 'jpg', 'png', 'jpeg', 'JPG' ]; //array of valid extensions
+			var fileName = input.files[0].name;
+			var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+			if ($.inArray(fileNameExt, validExtensions) == -1) {
+				input.type = ''
+				input.type = 'file'
+				$('#hinhAnh1').attr('src', "");
+				alert("Only these file types are accepted : "
+						+ validExtensions.join(', '));
+			} else {
+				if (input.files && input.files[0]) {
+					var filerdr = new FileReader();
+					filerdr.onload = function(e) {
+						$('#hinhAnh1').attr('src', e.target.result);
+					}
+					filerdr.readAsDataURL(input.files[0]);
+				}
+			}
+		};
+		function show1(input) {
+			debugger;
+			var validExtensions = [ 'jpg', 'png', 'jpeg', 'JPG' ]; //array of valid extensions
+			var fileName = input.files[0].name;
+			var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+			if ($.inArray(fileNameExt, validExtensions) == -1) {
+				input.type = ''
+				input.type = 'file'
+				$('#hinhAnh').attr('src', "");
+				alert("Only these file types are accepted : "
+						+ validExtensions.join(', '));
+			} else {
+				if (input.files && input.files[0]) {
+					var filerdr = new FileReader();
+					filerdr.onload = function(e) {
+						$('#hinhAnh').attr('src', e.target.result);
+					}
+					filerdr.readAsDataURL(input.files[0]);
+				}
+			}
+		}
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Quản Lý - Hóa Đơn Giao Hàng || ABC Store</title>
+<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: header"></div>
+
+
+</head>
+<body>
+	<div class="container-scroller">
+		<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: navheader"></div>
+		<div class="container-fluid page-body-wrapper">
+			<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: navleft"></div>
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="row">
+						<div class="col-md-12">
+							<div
+								class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">
+								<ul class="nav nav-tabs tab-transparent" role="tablist">
+									<li class="nav-item"><a class="nav-link" id="home-tab"
+										data-toggle="tab" href="#" role="tab" aria-selected="true">Hóa
+											Đơn</a></li>
+
+								</ul>
+
+							</div>
+									<div class="col-lg-12 grid-margin stretch-card">
+										<div class="card">
+											<div class="card-body">
+												<h4 class="card-title">Danh sách tất cả hóa đơn</h4>
+												<table id="dsHoaDon" class="display" style="width: 100%">
+													<thead>
+														<tr>
+															<th>Mã Hóa Đơn</th>
+															<th>Ngày Lập</th>
+															<th>Hình Thức Thanh Toán</th>
+															<th>Tổng Tiền</th>
+															<th>Trạng Thái</th>
+															<th>Người Mua</th>
+														</tr>
+													</thead>
+													<tbody>
+													</tbody>	
+												</table>
+											</div>
+										</div>
+									</div>
+								
+						</div>
+					</div>
+				</div>
+				<!-- content-wrapper ends -->
+				<!-- partial:partials/_footer.html -->
+				<footer class="footer">
+					<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: footer"></div>
+				</footer>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: lib"></div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#dsHoaDon').DataTable({
+		    "processing": true,
+		    "pageLength": 10,
+		    "searching": false,
+		    "serverSide": true,
+		    "info" : true,
+		    "ajax": {
+		        "url": "/quan-ly/hoa-don/danh-sach-hoa-don/list",
+		        "method":"get",
+		        "dataSrc": function (response) {
+		            var data = response.data; // your data list
+		            var all = [];
+		            for (var i = 0; i < data.length; i++) {
+		                var row = {
+		                    rows: response.start + i + 1,
+		                    id: data[i].id, // name ... ,
+		                    ngayLap: data[i].ngayLap,
+		                    hinhThucThanhToan: data[i].hinhThucThanhToan,
+		                    tongTien: data[i].tongTien,
+		                    trangThai: data[i].trangThai,
+
+		                };
+		                all.push(row);
+		            }
+		            return all;
+		        }
+
+		    },
+		    "columns": [
+		        { "data": "id"},
+		        { "data": "ngayLap"},
+		        { "data": "hinhThucThanhToan"},
+		        { "data": "tongTien"},
+		        { "data": "trangThai"}
+		    ]
+		});
+	});
+	
+	
+</script>
+</html>

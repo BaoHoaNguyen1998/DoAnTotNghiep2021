@@ -1,0 +1,217 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Quản Lý - Kiểm Duyệt Sản Phẩm || ABC Store</title>
+	<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: header"></div>
+
+</head>
+
+
+<body>
+	<div class="container-scroller">
+		<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: navheader"></div>
+		<div class="container-fluid page-body-wrapper">
+			<nav th:replace="/bocuc/bo-cuc-giao-dien-admin :: navleft"></nav>
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">
+						<ul class="nav nav-tabs tab-transparent" role="tablist">
+							<li class="nav-item"><a class="nav-link" id="home-tab" data-toggle="tab" href="#" role="tab"
+									aria-selected="true">Bán
+									Hàng</a></li>
+						</ul>
+					</div>
+					<div class="search-field d-none d-xl-block">
+
+							<form class="d-flex align-items-center h-100" th:action="@{/quan-ly/san-pham/tim-kiem/}" method="get">
+								<div class="input-group">
+									<div class="input-group-prepend bg-transparent">
+										<i class="input-group-text border-0 mdi mdi-magnify"></i>
+									</div>
+									<input type="search" th:value="${keyWord1}" name ="keyWord"
+										class="form-control bg-transparent border-0 "
+										placeholder="Nhập Sản Phẩm Cần Tìm Kiếm...">
+								</div>
+							</form>
+						</div>
+						<div th:if="${error !=null}">
+							<p style="color: red;"  th:text="${error}"></p>
+							</div>
+							<div id="resultMsgDiv">
+							</div>
+
+					<div class="tab-content tab-transparent-content">
+						<div class="tab-pane fade show active" id="business-1" role="tabpanel"
+							aria-labelledby="business-tab">
+							<div class="col-lg-12 grid-margin stretch-card">
+
+								<div class="card">
+									<div class="card-body">
+										<h4 class="card-title">Danh sách sản phẩm đang chờ chấp
+											nhận</h4>
+
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th>Hình Ảnh</th>
+													<th>Tên</th>
+													<th>Đơn Giá</th>
+													<th>Danh Mục</th>
+													<th>Người Bán</th>
+													<th>Tùy Chọn</th>
+												</tr>
+											</thead>
+
+											<th:block th:each="sanpham : ${listSanPham}">
+												<tr>
+													<td>
+														<div>
+															<a th:href="@{/san-pham/{id}(id=${sanpham.id})}"> <img
+																	class="primary-img" th:src="${sanpham.hinhAnh}"
+																	alt="single-product"
+																	style="height: 70px; width: 70px">
+															</a>
+														</div>
+													</td>
+													<td><a th:href="@{/san-pham/{id}(id=${sanpham.id})}"
+															th:text="${sanpham.tenSanPham}" style="font-size: 10px"></a>
+													</td>
+													<td><span class="price" style="font-size: 10px" th:text="${#numbers.formatDecimal(sanpham.donGia,0, 'COMMA',0, 'POINT')+' đ'}"></span></td>
+													<td><span class="price" style="font-size: 10px"
+														th:text="${sanpham.danhMuc.tenDanhMuc}"></span></td>
+													<td><span class="price" style="font-size: 10px"
+														th:text="${sanpham.nguoiDung.tenShop}"></span></td>
+													<td>
+														<a th:data-thing="${sanpham.id}" id="xoaSP" onclick="ktraXoaSP(this.getAttribute('data-thing'))" ><i style="color: red; "    class="mdi mdi-close"></i></a>
+														<a th:data-thing="${sanpham.id}" onclick="xemChiTietSP(this.getAttribute('data-thing'))" href="#xemChiTietHD" data-toggle="modal" ><i class="mdi mdi-border-color"></i></a>
+															<a 
+																th:data-thing="${sanpham.id}" id="xacNhan" onclick="xacNhanSP(this.getAttribute('data-thing'))"    ><i
+																	class="mdi mdi-check"></i></a>
+													</td>
+												</tr>
+											</th:block>
+										</table>
+
+
+									</div>
+									<div class="row">
+										<div class="container">
+											<form th:action="@{/quan-ly/san-pham/san-pham-can-duyet}"
+												method="get" id="formSubmit">
+												<div class="container">
+													<ul class="pagination" id="pagination"></ul>
+													<input type="hidden" value="" id="page" name="page" />
+												</div>
+
+											</form>
+										</div>
+
+									</div>
+								</div>
+								
+							</div>
+
+						</div>
+					</div>
+
+
+
+
+
+				</div>
+				<!-- content-wrapper ends -->
+				<!-- partial:partials/_footer.html -->
+				<footer class="footer">
+					<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: footer"></div>
+				</footer>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: lib"></div>
+	<script type="text/javascript">
+		
+		var currentPage = "[[${currentPage}]]";
+		$(function() {
+			window.pagObj = $('#pagination').twbsPagination({
+				totalPages : "[[${totalPage}]]",
+				visiblePages : 10,
+				startPage: currentPage,
+				onPageClick : function(event, page) {
+					if (currentPage != page) {
+						$('#page').val(page);
+						$('#formSubmit').submit();
+					}
+				}
+			})
+		});
+		
+		
+		function ktraXoaSP(idSP) {
+	        if (confirm('Bạn thực sự muốn xóa sản phẩm này!!!')) {
+	    		var workingObject = $(document.getElementById("xoaSP"));
+	    			$.ajax({
+	    			type : "GET",
+	    			url : "/quan-ly/san-pham/xoa-san-pham/" + idSP,
+	    		}).done(function (resultMsgDiv){
+	    			$("#resultMsgDiv").html("<p style='background-color:#67597E; color:white; padding:20px 20px 20px 20px'>" +
+	    					"Sản Phẩm với Id=" + idSP + " được xóa!"  +
+	    				"</p>");
+
+	    			workingObject.closest("tr").remove();
+	    		
+	    		}).fail(function(e){
+	    			alert("Lỗi: Xóa sản phẩm không thành công !!!");
+	    			console.log("ERROR: ", e);
+	    		});
+	        } else {
+	            return false;
+	        }
+	    }
+		
+		
+		function xacNhanSP(id) {
+	        if (confirm('Xác nhận sản phẩm được duyệt!!')) {
+	        	var workingObject = $(document.getElementById("xacNhan"));
+	    			$.ajax({
+	    			type : "GET",
+	    			url : "/quan-ly/san-pham/chap-nhan/" + id,
+	    		}).done(function (e){
+	    			alert("Xác nhận:  sản phẩm đã chấp nhận thành công !!!");
+	    			workingObject.closest("tr").remove();
+	    		}).fail(function(e){
+	    			alert("Lỗi:  sản phẩm xác nhận không thành công !!!");
+	    			console.log("ERROR: ", e);
+	    		});
+	        } else {
+	            return false;
+	        }
+	    }
+		
+		
+		function xemChiTietSP(id) {
+	        $.ajax({
+	            url: "/quan-ly/san-pham/" + id,
+	        }).done(function(data) {
+	        	//$('#xemChiTietHD #id').val(hd.id);
+	        		console.log(data)
+	             }
+	        ).fail(function(e){
+	        	console.log(e)});
+	        
+	    }
+	</script>
+
+
+
+</body>
+</html>

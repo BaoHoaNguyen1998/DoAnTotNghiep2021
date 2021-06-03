@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	class="no-js" lang="zxx">
+
+
+
+<div class="col-lg-2 col-md-2" th:fragment="nav_left2">
+	<div class="sidebar">
+
+		<div class="electronics mb-40">
+			<h3 class="sidebar-title">Đơn Hàng</h3>
+			<div id="shop-cate-toggle"
+				class="category-menu sidebar-menu sidbar-style">
+				<ul>
+					<li class="has-sub"><a href="#">Quản Lý Đơn Hàng</a>
+						<ul class="category-sub">
+							<li><a
+								th:href="@{/khach-hang/hoa-don/hoa-don-da-thanh-toan}">Đã
+									Thanh Toán</a></li>
+							<li><a th:href="@{/khach-hang/hoa-don/hoa-don-giao-hang}">Đang
+									Giao Hàng</a></li>
+							<li><a th:href="@{/khach-hang/hoa-don/hoa-don-da-huy}">Đã Hủy</a></li>
+
+
+						</ul></li>
+
+
+
+
+				</ul>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+
+
+
+</html>

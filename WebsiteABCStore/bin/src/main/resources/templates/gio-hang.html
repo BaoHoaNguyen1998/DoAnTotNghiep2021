@@ -1,0 +1,165 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Giỏ Hàng || ABC Store</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicons -->
+
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+	<!-- Main Wrapper Start Here -->
+	<div class="wrapper">
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a th:href="@{/}">Trang Chủ</a></li>
+						<li class="active"><a th:href="@{/gio-hang}">Giỏ Hàng</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+		
+
+		<div id="bodyGH" class="cart-main-area ptb-100 ptb-sm-60">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12">
+						<!-- Form Start -->
+
+						<!-- Table Content Start -->
+						<div class="table-content table-responsive mb-45">
+
+							<table id="gioHangKH">
+								<thead>
+									<tr>
+										<th class="product-thumbnail">Hình Ảnh</th>
+										<th class="product-name">Sản Phẩm</th>
+										<th class="product-price">Giá</th>
+										<th >Số Lượng</th>
+										<th class="product-subtotal">Tổng</th>
+										<th class="product-remove">Xóa</th>
+										
+									</tr>
+								</thead>
+								<tbody id="gioHangChiTiet">
+								</tbody>
+								
+							</table>
+
+						</div>
+						<!-- Table Content Start -->
+						<div class="row">
+							<!-- Cart Button Start -->
+							<div class="col-md-8 col-sm-12">
+								<div class="buttons-cart">
+									</br> <a th:href="@{/trang-chu}">Tiếp Túc Mua Sắm</a>
+									<p>* Đơn hàng bạn sẽ được miễn phí vận chuyển.
+									<p />
+
+								</div>
+							</div>
+							<!-- Cart Button Start -->
+							<!-- Cart Totals Start -->
+							<div class="col-md-4 col-sm-12">
+								<div class="cart_totals float-md-right text-md-right">
+									</br>
+									<h2>Tổng Tiền Giỏ Hàng</h2>
+									<br />
+									<table class="float-md-right">
+										<tbody>
+											<tr class="cart-subtotal">
+												<th>Tiền Ship</th>
+												<td><span class="amount">0 Đ</span></td>
+											</tr>
+											<tr class="order-total">
+												<th>Tổng</th>
+												<td><strong><span id="tongtienHD" class="amount"></span></strong></td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="wc-proceed-to-checkout">
+										<p>(Đã bao gồm VAT nếu có)</p>
+										<a th:href="@{/dat-hang}">Tiếp Tục Đặt Hàng </a>
+
+									</div>
+									</br>
+								</div>
+							</div>
+							<!-- Cart Totals End -->
+						</div>
+						<!-- Row End -->
+
+						<!-- Form End -->
+					</div>
+				</div>
+				<!-- Row End -->
+			</div>
+		</div>
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+
+	</div>
+	<!-- Main Wrapper End Here -->
+
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+	
+	<div class="modal fade" id="xoaSPGH" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Bạn thực sự muốn xóa sản phẩm</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-footer">
+				<input type="hidden" class="form-control" readonly id="rowXoa">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button type="button" onclick="xoaSPGioHang();" 
+						class="btn btn-danger">Xóa Sản Phẩm</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		loadGHChiTiet();
+	});
+	 
+	
+	  
+	
+
+	
+	
+	
+	
+	
+	
+	
+</script>
+
+
+</html>

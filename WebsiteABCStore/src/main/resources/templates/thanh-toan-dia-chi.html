@@ -1,0 +1,154 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Thanh Toán || ABC Store</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+	<!-- Main Wrapper Start Here -->
+	<div class="wrapper">
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a th:href="@{/}">Trang Chủ</a></li>
+						<li><a th:href="@{/gio-hang}">Giỏ Hàng</a></li>
+						<li class="active"><a th:href="@{/thanh-toan}">Thanh Toán</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+
+
+		<div class="coupon-area pt-100 pt-sm-60">
+			<div class="container">
+					
+					<div class="col-md-12">
+						<div class="different-address">
+								<div class="ship-different-title">
+									<h3>
+										<label>Gửi hàng đến một địa chỉ mới?</label> <input
+											id="ship-box" type="checkbox" />
+									</h3>
+								</div>
+								<form th:action="@{/tai-khoan/them-lien-he}"
+									th:object="${lienHeNew}" method="get">
+									<div id="ship-box-info">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="checkout-form-list mb-30">
+													<label>Họ Tên Khách Hàng</label> <input type="text"
+														th:field="*{hoTen}"
+														placeholder="Vui lòng nhập họ tên khách hàng ..." />
+												</div>
+											</div>
+
+											<div class="col-md-12">
+												<div class="checkout-form-list mb-30">
+													<label>Địa Chỉ</label> <input type="text"
+														th:field="*{diaChi}"
+														placeholder="Vui lòng nhập số địa chỉ ..." />
+												</div>
+											</div>
+
+
+											<div class="col-md-12">
+												<div class="checkout-form-list mb-30">
+													<label>Số Điện Thoại <span class="required">*</span></label>
+													<input type="text" th:field="*{soDienThoai}"
+														placeholder="Vui lòng nhập số điện thoại..." />
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="checkout-form-list mb-30">
+													<label>* Giao Mặc Định Ở Đây<span class="required">
+															<input th:field="*{trangThai}" value="true"
+															type="checkbox" />
+													</span></label>
+												</div>
+											</div>
+											<div class="col-md-12">
+
+												<input type="submit" value="Thêm địa chỉ mới"
+													class="return-customer-btn">
+
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="checkout-area pb-100 pt-15 pb-sm-60">
+			<div class="container">
+				<h3 style="margin: 10px;">Địa Chỉ Giao Hàng</h3>
+				<div class="row">
+					<div class="col-lg-6 col-md-6" th:each="lienhe : ${dslienhe}">
+						<div style="border-style: dotted; border-color: black;"
+							class="checkbox-form mb-sm-40">
+							<div class="col-md-12">
+							<i style="color: green;" th:if="${lienhe.trangThai == true }" th:text="${' Địa chỉ mặc định'}"></i>
+								<div class="checkout-form-list mb-30">
+									<label style="margin-top: 20px;">Họ Tên </label> <label
+										style="color: orange;" th:text="${lienhe.hoTen}">
+									</label>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="checkout-form-list mb-30">
+									<label >Địa Chỉ </label> <label style="color: orange;"
+										th:text="${lienhe.diaChi}">  </label> 
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="checkout-form-list mb-30">
+									<label>Số Điện Thoại <span class="required"></span></label> <label
+										style="color: orange;" th:text="${lienhe.soDienThoai}">
+									</label>
+								</div>
+							</div>
+							<form th:action="@{/dat-hang/chi-tiet}" method="get">
+								<input style="font-size: 10px; margin-top: -20px; margin-left: 15px;" type="submit"
+									value="Giao hàng tại địa chỉ này" class="return-customer-btn">
+									<input type="hidden" name = "idLienhe" th:value="${lienhe.id}"/>
+							</form>
+							<form style="margin-bottom: 15px; margin-left: 15px;" th:action="@{/tai-khoan/sua-tai-khoan}">
+								<input style="font-size: 10px;" type="submit" value="Sửa"
+									class="return-customer-btn"> <input th:if="${lienhe.trangThai == false}"
+									style="font-size: 10px; color: red;" type="submit" value="Xóa"
+									class="return-customer-btn">
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+</body>
+
+</html>

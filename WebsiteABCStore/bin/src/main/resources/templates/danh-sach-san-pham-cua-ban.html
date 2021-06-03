@@ -1,0 +1,240 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="utf-8">
+<title>ABC Store</title>
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+	<!-- Main Wrapper Start Here -->
+	<div class="wrapper">
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a th:href="@{/}">Danh Sách Sản Phẩm Của bạn</a></li>
+						<li class="active"><a th:href="@{/ban-hang/san-pham-cua-ban}">Sản
+								Phẩm Của Bạn</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+
+
+
+		<div class="main-shop-page pt-100 pb-100 ptb-sm-60">
+			<div class="container">
+
+				<div class="row">
+					<div th:replace="/bocuc/nav_left :: nav_left"></div>
+
+					<div class="col-lg-9 order-1 order-lg-2">
+
+						<div class="col-lg-12 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Sản Phẩm Của Bạn Đã Thông Qua Kiểm
+										Duyệt</h4>
+
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Hình Ảnh</th>
+												<th>Tên</th>
+												<th>Đơn Giá</th>
+												<th>Số lượng Bán</th>
+												<th>Danh Mục</th>
+												<th>Tùy Chọn</th>
+
+											</tr>
+										</thead>
+
+										<th:block th:each="sanpham : ${listSanPham}">
+											<tr>
+												<td><div>
+														<a th:data-thing="${sanpham.id}"
+															onclick="xemChiTietSP(this.getAttribute('data-thing'))"
+															href="#xemChiTietSP" data-toggle="modal"> <img
+															class="primary-img" th:src="${sanpham.hinhAnh}"
+															alt="single-product" style="height: 70px; width: 70px">
+														</a>
+													</div></td>
+
+
+
+
+
+												<td><a th:href="@{/san-pham/{id}(id=${sanpham.id})}"
+													th:text="${sanpham.tenSanPham}"></a></td>
+												<td><span class="price" style="font-size: 15px"
+													th:text="${#numbers.formatDecimal(sanpham.donGia,0, 'COMMA',0, 'POINT')+' đ'}"></span></td>
+
+												<td><span class="price" style="font-size: 15px"
+													th:text="${sanpham.soLuongBan}"></span></td>
+												<td><span class="price" style="font-size: 15px"
+													th:text="${sanpham.danhMuc.tenDanhMuc}"></span></td>
+
+
+												<td><a th:data-thing="${sanpham.id}"
+													onclick="xemChiTietSP(this.getAttribute('data-thing'))"
+													href="#xemChiTietSP" data-toggle="modal"> xxx</a></td>
+
+
+												<td><a class="return-customer-btn"
+													th:href="@{/ban-hang/xoa-san-pham/{id}(id=${sanpham.id})}"
+													type="submit">Xóa</a></td>
+
+												<!-- 	<td><a class="customer-btn"
+																th:href="@{/ban-hang/sua-san-pham/{id}(id=${sanpham.id})}"
+																type="submit">Sữa</a></td> -->
+
+											</tr>
+										</th:block>
+
+									</table>
+								</div>
+
+
+							</div>
+							<div class="row">
+								<div class="col-12 grid-margin">
+									<div class="container">
+										<div class="pro-pagination">
+											<table>
+												<tr class="blog-pagination">
+
+
+													<td class="page-item" th:each="pageNumber : ${pageNumbers}"><a
+														class="page-link"
+														th:href="@{/ban-hang/san-pham-cua-ban(page=${pageNumber})}"
+														th:text=${pageNumber}></a></td>
+												</tr>
+											</table>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Row End -->
+					</div>
+
+					<!-- #grid view End -->
+
+
+					<!-- Product Pagination Info -->
+				</div>
+				<!-- Grid & List Main Area End -->
+			</div>
+		</div>
+		<!-- product Categorie List End -->
+	</div>
+	<!-- Row End -->
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+
+
+	<!-- Main Wrapper End Here -->
+
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+
+
+	<div class="modal fade" id="xemChiTietSP" tabindex="-1" role="dialog"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Chi Tiết Sản Phẩm</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" style="color: blue;">
+					<div class="row">
+						<div class="col-md-4 col-sm-12">
+							<label>Id Sản Phẩm</label> <input type="text"
+								class="form-control" readonly id="id" name="id">
+							<p></p>
+						</div>
+						<div class="col-md-4 col-sm-12">
+							<label>Tên Sản Phẩm</label> <input type="text"
+								class="form-control" readonly id="tenSanPham" name="tenSanPham">
+							<p></p>
+						</div>
+						<div class="col-md-4 col-sm-12">
+							<label>Năm Sản Xuất</label> <input type="text"
+								class="form-control" readonly id="namSanXuat" name="namSanXuat">
+							<p></p>
+						</div>
+						<div class="col-md-4 col-sm-12">
+							<label>Số Lượng Bán</label> <input type="text"
+								class="form-control" readonly id="soLuongBan" name="soLuongBan">
+							<p></p>
+						</div>
+						<div class="col-md-4 col-sm-12">
+							<label>Số Lượng Kho</label> <input type="text"
+								class="form-control" readonly id="soLuongKho" name="soLuongKho">
+							<p></p>
+						</div>
+					
+
+
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-12">
+						<img id="hinhAnh" name="hinhAnh" style="width: 100px">
+						</div>
+
+
+					</div>
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Đóng</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	function xemChiTietSP(id) {
+		console.log("oh ");
+		$.ajax({
+			url : "/chi-tiet-san-pham-ban-hang/" + id,
+		}).done(function(data) {
+
+			$('#xemChiTietSP #id').val(data.id);
+			$('#xemChiTietSP #tenSanPham').val(data.tenSanPham);
+			$('#xemChiTietSP #namSanXuat').val(data.namSanXuat);
+			$('#xemChiTietSP #soLuongBan').val(data.soLuongBan);
+			$('#xemChiTietSP #soLuongKho').val(data.soLuongKho);
+			$('#xemChiTietSP #ngayTao').val(data.ngayTao);
+		
+		
+		}).fail(function(e) {
+			console.log(e)
+		});
+	}
+</script>
+
+</html>

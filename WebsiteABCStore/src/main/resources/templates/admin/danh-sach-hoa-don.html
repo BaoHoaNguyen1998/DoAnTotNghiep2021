@@ -1,0 +1,224 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>ABC Store</title>
+<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: header"></div>
+</head>
+
+
+<body>
+	<div class="container-scroller">
+		<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: navheader"></div>
+		<div class="container-fluid page-body-wrapper">
+			<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: navleft"></div>
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="row">
+						<div class="col-md-12">
+							<div
+								class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">
+								<ul class="nav nav-tabs tab-transparent" role="tablist">
+									<li class="nav-item"><a class="nav-link" id="home-tab"
+										data-toggle="tab" href="#" role="tab" aria-selected="true">Hóa
+											Đơn</a></li>
+
+								</ul>
+
+							</div>
+							<div class="search-field d-none d-xl-block">
+
+								<form class="d-flex align-items-center h-100" th:action="@{/quan-ly/hoa-don/tim-kiem/}" method="get">
+									<div class="input-group">
+										<div class="input-group-prepend bg-transparent">
+											<i class="input-group-text border-0 mdi mdi-magnify"></i>
+										</div>
+										<input type="text" th:value="${keyWord1}" name ="keyWord"
+											class="form-control bg-transparent border-0"
+											placeholder="Nhập Từ Khóa Tìm Kiếm...">
+										
+									</div>
+								</form>
+							</div>
+							<div th:if="${error !=null}">
+							<p style="color: red;"  th:text="${error}"></p>
+							</div>
+							<div id="resultMsgDiv">
+							</div>
+							<div class="tab-content tab-transparent-content">
+								<div class="tab-pane fade show active" id="business-1"
+									role="tabpanel" aria-labelledby="business-tab">
+									<div class="col-lg-12 grid-margin stretch-card">
+										<div class="card">
+											<div class="card-body">
+												<h4 class="card-title">Danh sách tất cả hóa đơn</h4>
+											
+												<table class="table table-striped">
+													<thead>
+														<tr>
+															<th>Mã Đơn Hàng</th>
+															<th>Ngày Lập</th>
+															<th>Khách Hàng</th>
+															<th>Tổng Tiền</th>
+															<th>Trạng Thái</th>
+															<th>Tùy Chọn</th>
+														</tr>
+													</thead>
+
+													<th:block th:each="hoaDon : ${listHoaDon}">
+														<tr>
+															<td  ><a style="font-size: 10px"
+																th:href="@{/quan-ly/don-hang/{id}(id=${hoaDon.id})}"
+																th:text="${hoaDon.id}"></a></td>
+															<td  ><span class="price" style="font-size: 10px"
+																th:text="${hoaDon.ngayLap}"></span></td>
+															<td  ><span class="price" style="font-size: 10px"
+																th:text="${hoaDon.nguoiDung.hoTen}"></span></td>
+															<td  ><span class="price" style="font-size: 10px"
+																th:text="${hoaDon.tongTien}"></span></td>
+															<td style="word-wrap:break-word;"><span class="price" style="font-size: 10px"
+																th:text="${hoaDon.trangThai}"></span></td>
+															<td> 
+															
+															<a th:data-thing="${hoaDon.id}" id="xoaHD" onclick="ktraXoaHD(this.getAttribute('data-thing'))" ><i style="color: red; "    class="mdi mdi-close"></i></a>
+															<a th:data-thing="${hoaDon.id}" onclick="xemChiTietHD(this.getAttribute('data-thing'))" href="#xemChiTietHD" data-toggle="modal" ><i class="mdi mdi-border-color"></i></a>
+															<a th:if="${hoaDon.trangThai=='Đang Giao Hàng'}"
+															th:data-thing="${hoaDon.id}" id="xacNhan" onclick="xacNhanHoanThanh(this.getAttribute('data-thing'))"    ><i
+															class="mdi mdi-check"></i></a>
+															</td>
+														</tr>
+													</th:block>
+
+												</table>
+											</div>
+											<form th:action="@{/quan-ly/hoa-don/danh-sach-hoa-don}"
+											method="get" id="formSubmit">
+											<div class="container">
+												<ul class="pagination" id="pagination"></ul>
+												<input type="hidden" value="" id="page" name="page" />
+											</div>
+
+										</form>
+
+										</div>
+
+									</div>
+
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- content-wrapper ends -->
+				<!-- partial:partials/_footer.html -->
+				<footer class="footer">
+					<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: footer"></div>
+				</footer>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: lib"></div>
+	
+<div class="modal fade" id="xemChiTietHD" tabindex="-1" th:fragment="view" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Chi Tiết Hóa Đơn</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="color: blue;">
+       	<div class="row">
+          <div class="col-md-4 col-sm-12">
+            <label>Id Hóa Đơn</label>
+           <input type="text" class="form-control" readonly  id="id" name="id" >
+           <p></p>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label>Ngày Lập Hóa Đơn</label>
+           <input type="text" class="form-control" readonly id="ngayLap" name="ngayLap" >
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label>Hình Thức Thanh Toán</label>
+           <input type="text" class="form-control" readonly id="hinhThucThanhToan" name="hinhThucThanhToan" >
+          </div>
+          </div>
+          <div class="row">
+          <div class="col-md-4 col-sm-12">
+            <label>Tổng Tiền</label>
+           <input type="text" class="form-control" 	readonly  id="tongTien" name="tongTien" >
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label>Trạng Thái || <i style="color: red;">Có thể thay đổi</i></label>
+           <input type="text" class="form-control" onmouseover="this.temp=this.value; this.value='';" onmouseout="this.value=this.temp;"  id="trangThai" name="trangThai" list="listTrangThai" >
+           <datalist id="listTrangThai">
+  			<option value="Đang Giao Hàng">
+  			<option value="Chờ Xử Lý">  
+  			<option value="Đã Thanh Toán">
+		</datalist>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label>Tiền Ship</label>
+           <input type="text" class="form-control" readonly id="tienShip" name="tienShip" >
+          </div>
+         </div>
+         <div class="row">
+          <div class="col-md-4 col-sm-12">
+            <label>Họ Tên Người Nhận</label>
+           <input type="text" class="form-control" 	readonly  id="hoTenNguoiNhan" name="hoTenNguoiNhan" >
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label>Địa Chỉ Nhận Hàng</label>
+           <input type="text" class="form-control" readonly id="diaChi" name="diaChi" >
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label>Số Điện Thoại Nhận Hàng</label>
+           <input type="text" class="form-control" readonly id="sdt" name="sdt" >
+          </div>
+         </div>
+         <label style="color: red;">Danh Sách Sản Phẩm</label>
+         <div class="row" id="dssp">
+         </div> 
+          
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="button" onclick="xacNhanSuaHD()" class="btn btn-primary">Lưu</button>
+      </div>
+       
+    </div>
+  </div> 
+</div>
+
+<script th:inline="javascript">
+var currentPage = "[[${currentPage}]]";
+$(function() {
+	window.pagObj = $('#pagination').twbsPagination({
+		totalPages : "[[${totalPage}]]",
+		visiblePages : 10,
+		startPage: currentPage,
+		onPageClick : function(event, page) {
+			if (currentPage != page) {
+				$('#page').val(page);
+				$('#formSubmit').submit();
+			}
+		}
+	})
+});
+		
+</script>
+<!-- Modal -->
+
+</body>
+</html>

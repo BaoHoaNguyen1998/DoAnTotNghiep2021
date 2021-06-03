@@ -1,0 +1,199 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Quản Lý - Kiểm Duyệt Sản Phẩm || CONNECTION</title>
+<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: header"></div>
+
+</head>
+
+
+<body>
+	<div class="container-scroller">
+		<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: navheader"></div>
+		<div class="container-fluid page-body-wrapper">
+			<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: navleft"></div>
+			<div class="main-panel">
+				<div class="content-wrapper">
+
+
+					<div class="row">
+						<div class="col-md-12">
+
+
+
+
+
+							<div
+								class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">
+								<ul class="nav nav-tabs tab-transparent" role="tablist">
+									<li class="nav-item"><a class="nav-link" id="home-tab"
+										data-toggle="tab" href="#" role="tab" aria-selected="true">Bán Hàng</a>
+									</li>
+
+								</ul>
+								<div class="d-md-block d-none">
+									<a href="#" class="text-light p-1"><i
+										class="mdi mdi-view-dashboard"></i></a> <a href="#"
+										class="text-light p-1"><i class="mdi mdi-dots-vertical"></i></a>
+								</div>
+							</div>
+							<div class="tab-content tab-transparent-content">
+								<div class="tab-pane fade show active" id="business-1"
+									role="tabpanel" aria-labelledby="business-tab">
+
+
+									<!-- 	
+									
+									<th:block th:each="list : ${listNguoiBanFalse}">
+									<div class="row">
+									
+										<div
+											class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
+											<div class="card">
+												<div class="card-body text-center">
+													<h5 class="mb-2 text-dark font-weight-normal" th:text="${list.tenTaiKhoanEmail}">
+														</h5>
+													<h4 class="mb-4 text-dark font-weight-bold" th:text="${list.nguoiDung.hoTen}"></h4>
+													<div
+														class="dashboard-progress dashboard-progress-2 d-flex align-items-center justify-content-center item-parent">
+														
+													</div>
+													<a class="mt-4 mb-0 font-weight-bold" 
+													th:href="@{/admin/tai-khoan/chap-nhan/{id}(id=${list.id})}"
+													type="submit"
+													>Chấp Nhận</a>
+													
+														<a class="btn mb-0 mt-2 text-dark font-weight-bold" 
+													th:href="@{/admin/tai-khoan/chap-nhan/{id}(id=${list.id})}"
+													type="submit"
+													>Xóa</a>
+													
+													
+												</div>
+											</div>
+										</div>
+										-->
+
+
+									<div class="col-lg-12 grid-margin stretch-card">
+										<div class="card">
+											<div class="card-body">
+												<h4 class="card-title">Danh Sách Người Bán đang chờ
+													chấp nhận</h4>
+
+												<table class="table table-striped">
+													<thead>
+														<tr>
+															<th>Hình Ảnh</th>
+															<th>Tên</th>
+															<th>Đơn Giá</th>
+															<th>Số lượng Bán</th>
+															<th>Danh Mục</th>
+															<th>Người Bán</th>
+															<th>Tùy Chọn</th>
+
+														</tr>
+													</thead>
+
+													<th:block th:each="sanpham : ${listSanPham}">
+														<tr>
+															<td><div>
+																	<a th:href="@{/san-pham/{id}(id=${sanpham.id})}"> <img
+																		class="primary-img" th:src="${sanpham.hinhAnh}"
+																		alt="single-product" style="height: 70px; width: 70px">
+																	</a>
+																</div></td>
+															<td><a th:href="@{/san-pham/{id}(id=${sanpham.id})}"
+																th:text="${sanpham.tenSanPham}"></a></td>
+															<td><span class="price" style="font-size: 15px"
+																th:text="${#numbers.formatDecimal(sanpham.donGia,0, 'COMMA',0, 'POINT')+' đ'}"></span></td>
+
+															<td><span class="price" style="font-size: 15px"
+																th:text="${sanpham.soLuongBan}"></span></td>
+															<td><span class="price" style="font-size: 15px"
+																th:text="${sanpham.danhMuc.tenDanhMuc}"></span></td>
+															<td><span class="price" style="font-size: 15px"
+																th:text="${sanpham.nguoiDung.tenShop}"></span></td>
+
+
+															<td><a class="font-weight-bold"
+																th:href="@{/quan-ly/san-pham/thong-qua-dang-san-pham/{id}(id=${sanpham.id})}"
+																type="submit">Thông Qua</a></td>
+															<td><a class="text-dark font-weight-bold"
+																th:href="@{/quan-ly/san-pham/xoa-san-pham/{id}(id=${sanpham.id})}"
+																type="submit" onclick="btnSelete_Click()">Xóa</a></td>
+
+														</tr>
+													</th:block>
+
+												</table>
+											</div>
+											<div class="row">
+												<div class="col-12 grid-margin">
+													<div class="container">
+														<div class="pro-pagination">
+															<table>
+																<tr class="blog-pagination">
+
+
+																	<td class="page-item"
+																		th:each="pageNumber : ${pageNumbers}"><a
+																		class="page-link"
+																		th:href="@{/quan-ly/san-pham/san-pham-can-duyet(page=${pageNumber})}"
+																		th:text=${pageNumber}></a></td>
+																</tr>
+															</table>
+
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+
+									</div>
+
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- content-wrapper ends -->
+				<!-- partial:partials/_footer.html -->
+				<footer class="footer">
+					<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: footer"></div>
+				</footer>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: lib"></div>
+	<script type="text/javascript">
+		function btnSelete_Click() {
+			var strconfirm = confirm("Are you sure you want to delete?");
+			if (strconfirm == true) {
+				return true;
+			} else {
+				return false;
+			}
+
+		}
+	</script>
+
+
+
+</body>
+</html>

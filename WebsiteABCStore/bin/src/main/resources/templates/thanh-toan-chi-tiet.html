@@ -1,0 +1,208 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Thanh Toán || ABC Store</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+	<!-- Main Wrapper Start Here -->
+	<div class="wrapper">
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a th:href="@{/}">Trang Chủ</a></li>
+						<li><a th:href="@{/gio-hang}">Giỏ Hàng</a></li>
+						<li class="active"><a th:href="@{/thanh-toan}">Thanh Toán</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+
+
+		<div class="coupon-area pt-100 pt-sm-60">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="coupon-accordion">
+							<!--  h3>
+								Có phiếu giảm giá? <span id="showcoupon">Nhấn vào đây để
+									nhập mã của bạn</span>
+							</h3>-->
+							<div id="checkout_coupon" class="coupon-checkout-content">
+								<div class="coupon-info">
+									<form action="#">
+										<p class="checkout-coupon">
+											<input type="text" class="code" placeholder="Mã giảm giá!!" />
+											<input type="submit" value="Áp dụng phiếu giảm giá" />
+										</p>
+									</form>
+								</div>
+							</div>
+							<!-- ACCORDION END -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="checkout-area pb-100 pt-15 pb-sm-60">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-md-6">
+						<div class="checkbox-form mb-sm-40">
+							<h3>Billing Details</h3>
+							<div class="row">
+								
+								<div class="col-md-12">
+									<div class="checkout-form-list mb-30">
+										<label>Họ Tên Người Mua </label> <input readonly
+											th:value="${lienhe.hoTen}" type="text" />
+									</div>
+								</div>
+
+								<div class="col-md-12">
+									<div class="checkout-form-list mb-30">
+										<label>Địa Chỉ</label> <input readonly
+											th:value="${lienhe.diaChi}" type="text" />
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="checkout-form-list mb-30">
+										<label>Số Điện Thoại <span class="required"></span></label> <input
+											readonly
+											th:value="${lienhe.soDienThoai}"
+											type="text"  />
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6">
+						<div class="your-order">
+							<h3>Hóa Đơn Của Bạn</h3>
+							<div class="your-order-table table-responsive">
+								<table>
+									<thead>
+										<tr>
+											<th class="product-name">Sản Phẩm</th>
+											<th class="product-total">Tổng Tiền</th>
+
+										</tr>
+									</thead>
+									<tbody id="thanhToanChiTiet">
+									</tbody>
+									<tfoot>
+										<tr class="cart-subtotal">
+											<th>Tiền Ship</th>
+											<td><span class="amount">0 đ</span></td>
+										</tr>
+										<tr class="order-total">
+											<th>Tổng Hóa Đơn</th>
+											<td><span class=" total amount" id="tongtienChiTiet"></span></td>
+										</tr>
+										<tr class="order-total">
+											<th>
+												<form th:action="@{/gio-hang}">
+													<input type="submit" value="Quay Lại Giỏ Hàng"
+														class="return-customer-btn">
+												</form>
+											</th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+							<div class="payment-method">
+								<div id="accordion">
+									<div class="card">
+										<div class="card-header" id="headingone">
+											<h5 class="mb-0">
+												<button class="btn btn-link" data-toggle="collapse"
+													data-target="#collapseOne" aria-expanded="true"
+													aria-controls="collapseOne">Thanh toán khi nhận
+													hàng</button>
+											</h5>
+										</div>
+
+										<div id="collapseOne" class="collapse show"
+											aria-labelledby="headingone" data-parent="#accordion">
+											<div class="card-body">
+												<a th:href="@{/dat-hang/thanh-toan-giao-hang/{id}(id=${lienhe.id})}">
+												<input type="submit" value="Đặt Hàng"
+														class="return-customer-btn"></a>
+											</div>
+										</div>
+									</div>
+									<div class="card">
+										<div class="card-header" id="headingtwo">
+											<h5 class="mb-0">
+												<button class="btn btn-link collapsed"
+													data-toggle="collapse" data-target="#collapseTwo"
+													aria-expanded="false" aria-controls="collapseTwo">
+													Thanh Toán Online</button>
+											</h5>
+										</div>
+										<div id="collapseTwo" class="collapse"
+											aria-labelledby="headingtwo" data-parent="#accordion">
+											<div class="card-body">
+												<input type="radio" disabled>Thanh toán online</input>
+											</div>
+										</div>
+									</div>
+									<div class="card">
+										<div class="card-header" id="headingthree">
+											<h5 class="mb-0">
+												<button class="btn btn-link collapsed"
+													data-toggle="collapse" data-target="#collapseThree"
+													aria-expanded="false" aria-controls="collapseThree">
+													PayPal</button>
+											</h5>
+										</div>
+										<div id="collapseThree" class="collapse"
+											aria-labelledby="headingthree" data-parent="#accordion">
+											<div class="card-body">
+												<form th:action="@{/pay-pal}" method="get">
+													<input type="submit" value="Thanh Toán Paypal"
+														class="return-customer-btn">
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+</body>
+<script type="text/javascript">
+$(document).ready(function() {
+	loadThanhToan();
+});
+</script>
+</html>

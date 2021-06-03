@@ -1,0 +1,423 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>ABC Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/web/img/favicon.ico">
+    <!-- Fontawesome css -->
+    <div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+    <!-- Main Wrapper Start Here -->
+    <div class="wrapper">
+
+        <div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+        <div class="breadcrumb-area mt-30">
+            <div class="container">
+                <div class="breadcrumb">
+                    <ul class="d-flex align-items-center">
+                        <li><a href="@{/}">Trang Chủ</a></li>
+                        <li class="active"><a href="@{/gio-hang}">Shop</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Container End -->
+        </div>
+
+        <div class="about-us pt-100 pt-sm-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="sidebar-img mb-all-30">
+                            <p>Hình ảnh</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-desc">
+                            <h3 class="mb-10 about-title">Thông tin về shop</h3>
+                            <p style="color: orange;" th:text="${nguoiDung.tenShop}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container End -->
+        </div>
+
+        <div class="main-shop-page pt-50 pb-50 ptb-sm-30">
+            <div class="container">
+                <!-- Row End -->
+                <div class="row">
+                    <!-- Sidebar Shopping Option Start -->
+                    <div class="col-lg-3 order-2 order-lg-1">
+                        <div class="sidebar">
+                            <!-- Sidebar Electronics Categorie Start -->
+                            <div class="electronics mb-40">
+                                <h3 class="sidebar-title">Danh Mục Sản Phẩm</h3>
+                                <div id="shop-cate-toggle" class="category-menu sidebar-menu sidbar-style">
+                                    <ul>
+                                        <li class="has-sub"><a href="#">Dữ liệu cứng</a>
+                                            <ul class="category-sub">
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                            </ul>
+                                            <!-- category submenu end-->
+                                        </li>
+                                        <li class="has-sub"><a href="#">Dữ liệu cứng</a>
+                                            <ul class="category-sub">
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                            </ul>
+                                            <!-- category submenu end-->
+                                        </li>
+                                        <li class="has-sub"><a href="#">Dữ liệu cứng</a>
+                                            <ul class="category-sub">
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                            </ul>
+                                            <!-- category submenu end-->
+                                        </li>
+                                        <li class="has-sub"><a href="#">Dữ liệu cứng</a>
+                                            <ul class="category-sub">
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                                <li><a href="shop.html">Dữ liệu cứng</a></li>
+                                            </ul>
+                                            <!-- category submenu end-->
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- category-menu-end -->
+                            </div>
+                            <!-- Sidebar Electronics Categorie End -->
+                            <!-- Price Filter Options Start -->
+                            <div class="search-filter mb-40">
+                                <h3 class="sidebar-title">Lọc theo giá</h3>
+                                <form action="#" class="sidbar-style">
+                                    <div id="slider-range"></div>
+                                    <input type="text" id="amount" class="amount-range" readonly>
+                                </form>
+                            </div>
+                            <!-- Price Filter Options End -->
+                            <!-- Sidebar Categorie Start -->
+                            <div class="sidebar-categorie mb-40">
+                                <h3 class="sidebar-title">Danh Mục Sản Phẩm Của Shop</h3>
+                                <ul class="sidbar-style">
+                                    <li class="form-check">
+                                        <input class="form-check-input" value="#" id="camera" type="checkbox">
+                                        <label class="form-check-label" for="camera">Dữ liệu cứng (8)</label>
+                                    </li>
+                                    <li class="form-check">
+                                        <input class="form-check-input" value="#" id="GamePad" type="checkbox">
+                                        <label class="form-check-label" for="GamePad">Dữ liệu cứng (8)</label>
+                                    </li>
+                                    <li class="form-check">
+                                        <input class="form-check-input" value="#" id="Digital" type="checkbox">
+                                        <label class="form-check-label" for="Digital">Dữ liệu cứng (8)</label>
+                                    </li>
+                                    <li class="form-check">
+                                        <input class="form-check-input" value="#" id="Virtual" type="checkbox">
+                                        <label class="form-check-label" for="Virtual"> Dữ liệu cứng (8) </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Sidebar Categorie Start -->
+                            <!-- Product Size Start -->
+                            <div class="size mb-40">
+                                <h3 class="sidebar-title">Dữ liệu cứng</h3>
+                                <ul class="size-list sidbar-style">
+                                    <li class="form-check">
+                                        <input class="form-check-input" value="" id="small" type="checkbox">
+                                        <label class="form-check-label" for="small">Dữ liệu cứng</label>
+                                    </li>
+                                    <li class="form-check">
+                                        <input class="form-check-input" value="" id="medium" type="checkbox">
+                                        <label class="form-check-label" for="medium">Dữ liệu cứng</label>
+                                    </li>
+                                    <li class="form-check">
+                                        <input class="form-check-input" value="" id="large" type="checkbox">
+                                        <label class="form-check-label" for="large">Dữ liệu cứng</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Product Size End -->
+                            <!-- Product Color Start -->
+                            <div class="color mb-40">
+                                <h3 class="sidebar-title">Dữ liệu cứng</h3>
+                                <ul class="color-option sidbar-style">
+                                    <li>
+                                        <span class="white"></span>
+                                        <a href="#">Dữ liệu cứng (4)</a>
+                                    </li>
+                                    <li>
+                                        <span class="orange"></span>
+                                        <a href="#">Dữ liệu cứng (2)</a>
+                                    </li>
+                                    <li>
+                                        <span class="blue"></span>
+                                        <a href="#">Dữ liệu cứng (6)</a>
+                                    </li>
+                                    <li>
+                                        <span class="yellow"></span>
+                                        <a href="#">Dữ liệu cứng (8)</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Product Color End -->
+                            <!-- Product Top Start -->
+                            <div class="top-new mb-40">
+                                <h3 class="sidebar-title">Sản Phẩm Mới Của Shop</h3>
+                                <div class="side-product-active owl-carousel">
+                                    <!-- Side Item Start -->
+                                    <div class="side-pro-item">
+                                        <!-- Single Product Start -->
+                                        <th:block th:each="sanpham : ${listSanPhamMoi}">
+                                        <div class="single-product single-product-sidebar">
+                                            <!-- Product Image Start -->
+                                            
+                                            <div class="pro-img">
+                                                <a th:href="@{/san-pham/{id}(id=${sanpham.id})}">
+                                                    <img class="primary-img" th:src="${sanpham.hinhAnh}" style="height: 150px;" 
+                                                        alt="single-product">
+                                                    <img class="secondary-img" th:src="${sanpham.hinhAnh1}" style="height: 150px;"
+                                                        alt="single-product">
+                                                </a>
+
+                                            </div>
+                                            <!-- Product Image End -->
+                                            <!-- Product Content Start -->
+                                            <div class="pro-content">
+                                                <h4><a th:href="@{/san-pham/{id}(id=${sanpham.id})}" th:text="${sanpham.tenSanPham}"></a></h4>
+                                                <p><span class="price" th:text="${#numbers.formatDecimal(sanpham.donGia,0, 'COMMA', 0, 'POINT')+' đ'}"></span><del
+                                                        class="prev-price" th:text="${#numbers.formatDecimal(sanpham.donGia,0, 'COMMA', 0, 'POINT')+' đ'}"></del></p>
+                                            </div>
+                                            <!-- Product Content End -->
+                                        </div>
+                                    </th:block>
+                                    </div>
+                                    <!-- Side Item End -->
+                                </div>
+                            </div>
+                            <!-- Product Top End -->
+                            <!-- Single Banner Start -->
+                            <div class="col-img">
+                                <a href="shop.html"><img src="/web/img/banner/banner-sidebar.jpg"
+                                        alt="slider-banner"></a>
+                            </div>
+                            <!-- Single Banner End -->
+                        </div>
+                    </div>
+                    <!-- Sidebar Shopping Option End -->
+                    <!-- Product Categorie List Start -->
+                    <div class="col-lg-9 order-1 order-lg-2">
+                        <!-- Grid & List View Start -->
+                        <div
+                            class="grid-list-top border-default universal-padding d-md-flex justify-content-md-between align-items-center mb-30">
+                            <div class="grid-list-view  mb-sm-15">
+                                <ul class="nav tabs-area d-flex align-items-center">
+                                    <li><a class="active" data-toggle="tab" href="#grid-view"><i
+                                                class="fa fa-th"></i></a></li>
+                                    <li><a data-toggle="tab" href="#list-view"><i class="fa fa-list-ul"></i></a></li>
+                                </ul>
+                            </div>
+                            <!-- Toolbar Short Area Start -->
+                            <div class="main-toolbar-sorter clearfix">
+                                <div class="toolbar-sorter d-flex align-items-center">
+                                    <label>Lọc theo:</label>
+                                    <select class="sorter wide">
+                                        <option value="Position">Mặc định</option>
+                                        <option value="Product Name">Tên SP, A to Z</option>
+                                        <option value="Product Name">Tên SP, Z to A</option>
+                                        <option value="Price">Giá SP tăng dần</option>
+                                        <option value="Price" selected>Giá SP giảm dần</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Toolbar Short Area End -->
+                            <!-- Toolbar Short Area Start -->
+                            <div class="main-toolbar-sorter clearfix">
+                                <div class="toolbar-sorter d-flex align-items-center">
+                                    <label>Hiển thị:</label>
+                                    <select class="sorter wide">
+                                        <option value="12">24</option>
+                                        <option value="25">48</option>
+                                        <option value="50">100</option>
+                                        <option value="75">150</option>
+                                        <option value="100">120</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Toolbar Short Area End -->
+                        </div>
+                        <!-- Grid & List View End -->
+                        <div class="main-categorie mb-all-40">
+                            <!-- Grid & List Main Area End -->
+                            <div class="tab-content fix">
+                                <div id="grid-view" class="tab-pane fade show active">
+                                    <div class="row">
+                                        <th:block th:each="sanpham : ${listSanPham}">
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <div class="single-product">
+                                                    <!-- Product Image Start -->
+                                                    <div class="pro-img">
+                                                        <a th:href="@{/san-pham/{id}(id=${sanpham.id})}"> <img
+                                                                 class="primary-img"
+                                                                th:src="${sanpham.hinhAnh}" alt="single-product"> <img
+                                                                class="secondary-img" th:src="${sanpham.hinhAnh1}"
+                                                                alt="single-product">
+                                                        </a>
+                                                    </div>
+                                                    <!-- Product Image End -->
+                                                    <!-- Product Content Start -->
+                                                    <div class="pro-content">
+                                                        <h4>
+                                                            <a th:href="@{/san-pham/{id}(id=${sanpham.id})}"
+                                                                th:text="${sanpham.tenSanPham}"></a>
+                                                        </h4>
+                                                        <p>
+                                                            <span class="price" th:text="${#numbers.formatDecimal(sanpham.donGia,0, 'COMMA', 0, 'POINT')+' đ'}"></span>
+														<del class="prev-price"
+															th:text="${#numbers.formatDecimal(sanpham.donGia  ,0, 'COMMA', 0, 'POINT')+' đ'}"></del>
+													</p>
+
+													<div class="label-product ">
+														<i style="font-size: 11px;">Số lượng bán</i> <span
+															class="symbol-percent" th:text="${sanpham.soLuongBan}"></span>
+													</div>
+													<div class="pro-actions">
+														<div class="actions-primary">
+															<a th:href="@{/san-pham/{id}(id=${sanpham.id})}"
+																title="Xem Chi Tiết Sản Phẩm">Xem Chi Tiết Sản Phẩm</a>
+														</div>
+
+													</div>
+												</div>
+											</div>
+                                        </div>
+                                        </th:block>
+                                    
+                                        <!-- Single Product End -->
+                                    </div>
+                                    <!-- Row End -->
+                                </div>
+                                <!-- #grid view End -->
+                                <div id="list-view" class="tab-pane fade">
+                                    
+                                    
+                                    <th:block th:each="sanpham : ${listSanPham}">
+                                    <div class="single-product"> 
+                                        <div class="row">        
+                                            <!-- Product Image Start -->
+                                            <div class="col-lg-4 col-md-5 col-sm-12">
+                                                <div class="pro-img">
+                                                    <a th:href="@{/san-pham/{id}(id=${sanpham.id})}"> <img 
+                                                        class="primary-img" th:src="${sanpham.hinhAnh}"
+                                                        alt="single-product"> <img class="secondary-img"
+                                                        th:src="${sanpham.hinhAnh1}" alt="single-product">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!-- Product Image End -->
+                                            <!-- Product Content Start -->
+                                            <div class="col-lg-8 col-md-7 col-sm-12">
+                                                <div  class="pro-content hot-product2">
+													<h4>
+															<a th:href="@{/san-pham/{id}(id=${sanpham.id})}"
+																th:text="${sanpham.tenSanPham}"></a>
+													</h4>
+													<p>
+															<span class="price"
+																th:text="${#numbers.formatDecimal(sanpham.donGia,0, 'COMMA', 0, 'POINT')+' đ'}"></span>
+															<del class="prev-price"
+																th:text="${#numbers.formatDecimal(sanpham.donGia  ,0, 'COMMA', 0, 'POINT')+' đ'}"></del>
+														</p>
+													<p th:text="${sanpham.moTaChiTiet}"></p>
+													<div class="label-product ">
+															<i style="size: 12px;">Số lượng bán</i> <span
+																class="symbol-percent" th:text="${sanpham.soLuongBan}"></span>
+														</div>
+													<div class="pro-actions">
+														<div class="actions-primary">
+															<a th:href="@{/san-pham/{id}(id=${sanpham.id})}"
+																title="Xem Chi Tiết Sản Phẩm">Xem Chi Tiết Sản Phẩm</a>
+														</div>
+
+													</div>
+												</div>
+                                            </div>
+                                            <!-- Product Content End -->
+                                        </div>
+                                    </div>
+                                    </th:block>
+                                </div>  
+                                
+                                <!-- #list view End -->
+                                <div class="pro-pagination">
+                                    <form th:action="@{/shop/{idshop}(idshop=${nguoiDung.id})}"
+											method="get" id="formSubmit">
+											<div class="container">
+												<ul class="pagination" id="pagination"></ul>
+												<input type="hidden" value="" id="page" name="page" />
+									
+											</div>
+
+					                </form>                                  
+                                </div>
+                                <!-- Product Pagination Info -->
+                            </div>
+                            <!-- Grid & List Main Area End -->
+                        </div>
+                    </div>
+                    <!-- product Categorie List End -->
+                </div>
+                <!-- Row End -->
+            </div>
+            <!-- Container End -->
+        </div>
+		
+		
+		
+		
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+
+	</div>
+	<!-- Main Wrapper End Here -->
+
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+</body>
+<script type="text/javascript">
+	var currentPage = "[[${currentPage}]]";
+		$(function() {
+			window.pagObj = $('#pagination').twbsPagination({
+				totalPages : "[[${totalPage}]]",
+				visiblePages : 10,
+				startPage: currentPage,
+				onPageClick : function(event, page) {
+					if (currentPage != page) {
+						$('#page').val(page);
+						$('#formSubmit').submit();
+					}
+				}
+			})
+		});
+	</script>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<link rel="stylesheet"
+	href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+<script type="text/javascript" th:src="@{js/bottom.css}"
+	src="../static/js/bottom.css"></script>
+<script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{js/main.js}"
+	src="../static/js/main.js"></script>
+<script type="text/javascript"
+	src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+
+<head>
+<meta charset="utf-8">
+<title>Trang Chủ || ABC Store</title>
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+	<!-- Main Wrapper Start Here -->
+	<div class="wrapper">
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a th:href="@{/}">Trang Chủ</a></li>
+						<li class="active"><a th:href="@{/tai-khoan/dia-chi}">Danh
+								Sách Địa Chỉ</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+
+
+		<!-- Breadcrumb End -->
+		<!-- Shop Page Start -->
+		<div class="main-shop-page pt-100 pb-100 ptb-sm-60">
+			<div class="container">
+				<!-- Row End -->
+				<div class="row">
+
+
+					<div th:replace="/bocuc/nav_left_tai_khoan :: nav_left_tai_khoan"></div>
+					<div class="col-lg-10 col-md-10 col-sm-10 col-10">
+
+						<form class="form-register" action="#"
+							th:action="@{/tai-khoan/dia-chi/sua-dia-chi/{id} (id=${lienHe.id})}"
+							th:object="${lienHe}" method="POST">
+
+							<div>
+								<div class="row">
+									<div class="col-md-12">
+										<input th:field="*{id}" type="hidden" class="form-control"
+											th:value="*{id}">
+										<div class="checkout-form-list mb-30">
+											<label>Họ Tên Khách Hàng</label> <input type="text"
+												th:field="*{hoTen}"
+												placeholder="Vui lòng nhập họ tên khách hàng ..." />
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="checkout-form-list mb-30">
+											<label>Địa Chỉ</label> <input type="text"
+												th:field="*{diaChi}"
+												placeholder="Vui lòng nhập số địa chỉ ..." />
+										</div>
+									</div>
+
+
+									<div class="col-md-12">
+										<div class="checkout-form-list mb-30">
+											<label>Số Điện Thoại <span class="required">*</span></label>
+											<input type="text" th:field="*{soDienThoai}"
+												placeholder="Vui lòng nhập số điện thoại..." />
+										</div>
+									</div>
+
+									<div class="col-md-12">
+
+										<input type="submit" value="Sửa Địa Chỉ"
+											class="return-customer-btn">
+
+									</div>
+								</div>
+							</div>
+						</form>
+
+
+					</div>
+				</div>
+
+			</div>
+
+
+
+
+
+
+
+			<!-- Product Pagination Info -->
+		</div>
+		<!-- Grid & List Main Area End -->
+	</div>
+
+
+
+
+
+
+
+
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+
+
+	<!-- Main Wrapper End Here -->
+
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+
+	<script type="text/javascript">
+		
+	</script>
+</body>
+
+</html>

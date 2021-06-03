@@ -1,0 +1,81 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>404 error|| ABC Store</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.png">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+	<!-- Main Wrapper Start Here -->
+	<div class="wrapper">
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a href="index.html">Trang Chủ</a></li>
+						<li class="active"><a href="cart.html">404</a></li>
+						
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+		
+		
+		<div class="error404-area ptb-100 ptb-sm-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="error-wrapper text-center">
+                            <div class="error-text">
+                                
+                                <h1>404</h1>
+                                <h2>Opps! PAGE NOT BE FOUND</h2>
+				<h1><?php echo "Hello wold";?></h1>
+                                <p>Xin lỗi nhưng trang bạn đang tìm kiếm không tồn tại, đã bị xóa, tên đã thay đổi hoặc không có sẵn tạm thời.</p>
+                            </div>
+                            <div class="search-error">
+                                <form id="search-form" action="#">
+                                    <input type="text" placeholder="Tìm Kiếm">
+                                    <button><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                            <div class="error-button">
+                                <a th:href="@{/}">Tiếp tục mua sắm.</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		
+		
+		
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+
+	</div>
+	<!-- Main Wrapper End Here -->
+
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+</body>
+
+</html>

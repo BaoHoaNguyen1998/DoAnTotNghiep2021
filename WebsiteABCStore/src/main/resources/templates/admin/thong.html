@@ -1,0 +1,125 @@
+
+<!doctype html>
+
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+
+
+
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Quản Lý - Kiểm Duyệt Sản Phẩm || ABC Store</title>
+<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: header"></div>
+
+</head>
+
+
+<body>
+	<div class="container-scroller">
+		<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: navheader"></div>
+		<div class="container-fluid page-body-wrapper">
+			<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: navleft"></div>
+			<div class="main-panel">
+				<div class="content-wrapper">
+
+
+					<div class="row">
+						<div class="col-md-12">
+
+
+
+
+
+
+							<div class="tab-content tab-transparent-content">
+								<div class="tab-pane fade show active" id="business-1"
+									role="tabpanel" aria-labelledby="business-tab">
+
+
+
+
+
+									<div class="col-lg-12 grid-margin stretch-card">
+
+
+
+										<!-- 
+										<th:block th:each="list : ${listReceipt}">
+											<div class="row">
+
+												<div
+													class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
+													<div class="card">
+														<div class="card-body text-center">
+															<h5 class="mb-2 " th:text="${list.time}"></h5>
+															<h4 class="mb-2" th:text=" '++' + ${list.value}"></h4>
+
+
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</th:block>
+										
+										           var lineChartData = {
+                  labels: [<c:each="item : ${listReceipt}">'${item.time}',</c:each],
+                  datasets: [
+                       {
+                             fillColor: "#FC8213",
+                             data: [<c:each="item : ${listReceipt}">${item.value},</c:each>]
+                       }
+                  ]
+
+             };
+             new Chart(document.getElementById("viewchart1").getContext("2d")).Line(lineChartData);
+
+
+ -->
+
+
+										<div>
+											<h3 class="tlt">Line Chart</h3>
+											<canvas id="viewchart1" height="300" width="400"
+												style="width: 600px; height: 300px;"></canvas>
+											<script type="text/javascript" th:inline="text">
+									           var lineChartData = {
+									                   labels: [<c:each="item : ${listReceipt}">'${item.time}',</c:each],
+									                   datasets: [
+									                        {
+									                              fillColor: "#FC8213",
+									                              data: [<c:each="item : ${listReceipt}">${item.value},</c:each>]
+									                        }
+									                   ]
+
+									              };
+									              new Chart(document.getElementById("viewchart1").getContext("2d")).Line(lineChartData);
+											</script>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- content-wrapper ends -->
+				<!-- partial:partials/_footer.html -->
+				<footer class="footer">
+					<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: footer"></div>
+				</footer>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: lib"></div>
+
+</body>
+</html>

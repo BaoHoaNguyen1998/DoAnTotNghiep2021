@@ -1,0 +1,97 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Đăng Nhập || ABC Store</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+	<!-- Main Wrapper Start Here -->
+	<div class="wrapper">
+
+		 <div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a th:href="@{/}">Trang Chủ</a></li>
+						<li class="active"><a th:href="@{/dang-nhap}">Đăng Nhập</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+		
+		<div class="log-in ptb-100 ptb-sm-60">
+            <div class="container">
+                <div class="row">
+                    <!-- New Customer Start -->
+                    <div class="col-md-6">
+                        <div class="well mb-sm-30">
+                            <div class="new-customer">
+                                <h3 class="custom-title">Tài Khoản Mới</h3>
+                                <p class="mtb-10"><strong>Đăng Ký</strong></p>
+                                <p>Bằng cách tạo tài khoản, bạn sẽ có thể mua sắm nhanh hơn, cập nhật trạng thái của đơn hàng và theo dõi các đơn hàng bạn đã thực hiện trước đó.</p>
+                                <a class="customer-btn" th:href="@{/dang-ky}">Tiếp Tục</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- New Customer End -->
+                    <!-- Returning Customer Start -->
+                    
+                    <div class="col-md-6">
+                        <div class="well">
+                            <div class="return-customer">
+                            <h3 th:text="${mess}" class="mb-5 custom-title" style="color: orange;"></h3>
+                                <h3 class="mb-10 custom-title">Tài Khoản Của Bạn</h3>
+                                <form th:action="@{/dang-nhap}" method="post">
+                                <p th:if="${param.error}" class="error" style="color: red;"> Tài khoản email hoặc mật khẩu không chính xác.</p>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" name="username" placeholder="Vui lòng nhập email..." id="input-email" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mật Khẩu</label>
+                                        <input  type="password" name="password" th:maxlength="12" th:minlength="6" placeholder="Mật Khẩu" id="input-password" class="form-control">
+                                    </div>
+                                    <input  type="checkbox" value="Lưu Tài Khoản" name ="remember-me"> <i>Lưu Mật Khẩu</i>
+                                    <p class="lost-password"><a th:href="@{/quen-mat-khau}">Quên Mật Khẩu?</a></p>
+                                   
+                                    <input type="submit" value="Đăng Nhập" class="return-customer-btn">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Returning Customer End -->
+                </div>
+                <!-- Row End -->
+            </div>
+            <!-- Container End -->
+        </div>
+		
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+
+	</div>
+	<!-- Main Wrapper End Here -->
+
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+</body>
+
+</html>

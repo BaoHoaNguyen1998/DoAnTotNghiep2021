@@ -1,0 +1,170 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="utf-8">
+<title>Thong Ke || CONNECTION</title>
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+	<!-- Main Wrapper Start Here -->
+	<div class="wrapper">
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a th:href="@{/}">Trang Chủ</a></li>
+						<li class="active"><a th:href="@{/ban-hang/san-pham-cua-ban}"> Thống Kê Doanh Thu </a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+
+
+
+		<div class="main-shop-page pt-100 pb-100 ptb-sm-60">
+			<div class="container">
+
+				<div class="row">
+					<div th:replace="/bocuc/nav_left :: nav_left"></div>
+
+					<div id="container"
+					style="width: 950px; height: 450px; margin: 0 auto"></div>
+					
+					
+					
+					<div id="container1" style="height: 400px; margin-left: 34%"></div>
+	
+
+					<!-- #grid view End -->
+
+
+					<!-- Product Pagination Info -->
+				</div>
+				<!-- Grid & List Main Area End -->
+			</div>
+		</div>
+		<!-- product Categorie List End -->
+	</div>
+	<!-- Row End -->
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+
+
+	<!-- Main Wrapper End Here -->
+
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+	
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	
+	<script th:inline="javascript">
+    $(function(){
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Biểu Đồ Thống Kê Doanh Thu Người Bán'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: [[${surveyMap.keySet()}]],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            max:[[${tong}]],
+            title: {
+                text: '[Tổng Tiền]'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.3,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Thanh Toán Khi Nhận Hàng',
+            data: [[${surveyMap.values()}]]
+        },
+        {
+            name: 'Thanh Toán Paypal',
+            data: [[${surveyMap1.values()}]]
+        }]
+    });
+    });
+    
+    
+    Highcharts.chart('container1', {
+		chart : {
+			type : 'pie',
+			options3d : {
+				enabled : true,
+				alpha : 30,
+				beta : 0
+			}
+		},
+		title : {
+			text : 'Biểu Đồ Phần Trăm Doanh Thu Giữa Hai Hình Thức Thanh Toán'
+			
+		},
+		 subtitle: {
+			 text : 'TỔNG THANH TOÁN : ' + [[${tongtatca}]] + ' vnd'
+	        },
+		tooltip : {
+			pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+		},
+		plotOptions : {
+			pie : {
+				allowPointSelect : true,
+				cursor : 'pointer',
+				depth : 35,
+				dataLabels : {
+					enabled : true,
+					format : '{point.name}'
+				}
+			}
+		},
+		series : [ {
+			type : 'pie',
+			name : 'Phan Tram',
+			data : [ [ 'Thanh Toán Khi Nhận Hàng ' + [[${tongthuong}]] + ' vnd', [[${pass}]] ], [ 'Thanh Toán Paypal '+ [[${tongpaypal}]] + ' vnd', [[${fail}]] ]]
+		} ]
+	});
+    
+</script>
+</body>
+
+</html>

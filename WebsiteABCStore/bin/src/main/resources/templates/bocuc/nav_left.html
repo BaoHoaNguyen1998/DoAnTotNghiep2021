@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	class="no-js" lang="zxx">
+
+
+
+<div class="col-lg-2 col-md-2" th:fragment="nav_left">
+	<div class="sidebar">
+
+		<div class="electronics mb-40">
+			<h3 class="sidebar-title">Shop Của Bạn</h3>
+			<div id="shop-cate-toggle"
+				class="category-menu sidebar-menu sidbar-style">
+				<ul>
+					<li class="has-sub"><a href="#">Quản Lý Sản Phẩm</a>
+						<ul class="category-sub">
+							<li><a th:href="@{/ban-hang/san-pham-cua-ban}">Sản Phẩm
+									Của Bạn</a></li>
+									
+							<li><a th:href="@{/ban-hang/san-pham-cho-kiem-duyet}">Sản Phẩm Đang Chờ Kiểm Duyệt</a></li>
+
+
+						</ul></li>
+					<li class="has-sub"><a href="#">Bán Hàng</a>
+						<ul class="category-sub">
+							<li><a th:href="@{/quan-ly/san-pham/them-san-pham-moi}">Thêm Sản
+									Phẩm Mới</a></li>
+									
+
+						</ul></li>
+						
+						<li class="has-sub"><a href="#">Quản Lý Đặt Hàng</a>
+						<ul class="category-sub">
+							<li><a href="#">Đơn Đặt Hàng</a></li>
+									
+
+						</ul></li>
+						
+						
+						<li class="has-sub"><a href="#">Thống Kê</a>
+						<ul class="category-sub">
+							<li><a th:href="@{/ban-hang/thong-ke/bay-ngay-lien-tuc-nguoi-ban}">Bảy Ngày Liên Tục</a></li>
+							<li><a th:href="@{/ban-hang/thong-ke/tu-dau-thang-den-nay-nguoi-ban}">Từ Đầu Tháng Đến Nay</a></li>	
+							<li><a th:href="@{/ban-hang/thong-ke/tu-dau-nam-den-nay-nguoi-ban}">Từ Đầu Năm Đến Cuối Tháng Trước</a></li>		
+
+						</ul></li>
+
+
+				</ul>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+
+
+
+</html>

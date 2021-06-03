@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	class="no-js" lang="zxx">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Quên Mật Khẩu || ABC Store</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+
+</head>
+
+<body>
+
+	<div class="wrapper">
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a th:href=@{/}>Trang Chủ</a></li>
+						<li class="active"><a th:href=@{/dang-ky}>Đăng Ký</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+
+		<!-- Register Account Start -->
+		<div class="register-account ptb-100 ptb-sm-60">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="register-title">
+							<h3 class="mb-10">Tìm lại mật khẩu</h3>
+							<p class="mb-10">Vui lòng nhập email đăng ký để tìm lại mật
+								khẩu</p>
+						</div>
+					</div>
+				</div>
+				<!-- Row End -->
+				<div class="row">
+					<div class="col-sm-12">
+						<form class="form-register" action="#"
+							th:action="@{/quen-mat-khau}" th:object="${taiKhoan1}"
+							method="POST">
+
+							<fieldset>
+								<legend>Nhập Email</legend>
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="email"><span
+										class="require">*</span>Email</label>
+
+									<div class="col-md-5">
+										<input type="email" class="form-control"
+											placeholder="Nhập email của bạn"
+											th:field="*{tenTaiKhoanEmail}" required id="email"
+											onchange="checkEmail()">
+
+
+									</div>
+									<div class="col-md-4">
+										<button class="return-customer-btn" type="submit"
+											onclick="checkEmail()" style="margin-top: -2px">Tìm
+											Tài Khoản</button>
+									</div>
+								</div>
+							</fieldset>
+
+							<fieldset style="margin-top: 25px">
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="email"><span
+										class="require">*</span>Email Tài Khoản</label>
+									<div class="col-md-5">
+										<span th:if="${email}==null" th:text="' '"> </span> <span
+											th:unless="${email}==null" th:text="${' '+email}"> </span>
+									</div>
+								</div>
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="ten"><span
+										class="require">*</span>Tên Bạn</label>
+									<div class="col-md-5">
+										<span th:if="${ten}==null" th:text="' '"> </span> <span
+											th:unless="${ten}==null" th:text="${' '+ten}"> </span>
+									</div>
+								</div>
+								<div class="form-group d-md-flex align-items-md-center">
+
+									<span th:text="${xacnhan}" style="color: orange;"></span>
+								</div>
+
+							</fieldset>
+
+
+				
+						</form>
+					</div>
+				</div>
+				<!-- Row End -->
+			</div>
+
+			<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+		</div>
+</div>
+		<script type="text/javascript">
+			function checkEmail() {
+				var email = document.getElementById('email');
+				var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+				if (!filter.test(email.value)) {
+					alert('Hay nhap dia chi email hop le.\nExample@gmail.com');
+					email.focus;
+					return false;
+				}
+
+				return true;
+
+			}
+		</script>
+</body>
+
+</html>

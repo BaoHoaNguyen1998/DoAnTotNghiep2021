@@ -1,0 +1,73 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Giao Dịch Thất Bại || ABC Store</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+	<div class="wrapper">
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a th:href="@{/}">Trang Chủ</a></li>
+						<li class="active"><a href="#">Giao Dịch Thất Bại</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+		
+		
+		<div class="error404-area ptb-100 ptb-sm-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="error-wrapper text-center">
+                            <div class="error-text">
+                                
+                                <h2>Giao Dịch Thất bại</h2>
+                                <p>Vui lòng thử lại.</p>
+                            </div>
+                            <div class="search-error">
+                                <form id="search-form" action="#">
+                                    <input type="text" placeholder="Tìm Kiếm">
+                                    <button><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                            <div class="error-button">
+                                <a th:href="@{/}">Tiếp tục mua sắm.</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		
+		
+		
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+
+	</div>
+	<!-- Main Wrapper End Here -->
+
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+</body>
+
+</html>

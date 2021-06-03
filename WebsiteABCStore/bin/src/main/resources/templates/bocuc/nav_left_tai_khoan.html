@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	class="no-js" lang="zxx">
+
+
+
+<div class="col-lg-2 col-md-2" th:fragment="nav_left_tai_khoan">
+	<div class="sidebar">
+		<!-- Sidebar Electronics Categorie Start -->
+		<div class="electronics mb-40">
+			<h3 class="sidebar-title">Tài Khoản</h3>
+			<div id="shop-cate-toggle"
+				class="category-menu sidebar-menu sidbar-style">
+				<ul>
+					<li class="has-sub"><a href="#">Tài khoản</a>
+						<ul class="category-sub">
+							<li><a th:href="@{/tai-khoan/dia-chi}">Danh Sách Liên Hệ</a></li>
+
+
+						</ul> <!-- category submenu end--></li>
+
+
+
+
+
+
+
+
+					<li class="has-sub" th:if="${#request.isUserInRole('seller')}"
+						role="presentation"><a
+						th:href="@{/ban-hang/san-pham-cua-ban}">Cửa Hàng Của Bạn</a>
+						<ul class="category-sub">
+							<li><a th:href="@{/ban-hang/san-pham-cua-ban}">Sản Phẩm
+									Của Bạn</a></li>
+							<li><a th:href="@{/them-san-pham-moi}">Thêm Sản
+									Phẩm Mới</a></li>
+
+
+						</ul> <!-- category submenu end--></li>
+
+
+					<li class="has-sub" th:if="${#request.isUserInRole('user')}"
+						role="presentation"><a href="#">Quản Lý Hóa Đơn</a>
+						<ul class="category-sub">
+						
+						<li><a th:href="@{/khach-hang/hoa-don/hoa-don-da-thanh-toan}">Đã Thanh Toán</a></li>
+						<li><a th:href="@{/khach-hang/hoa-don/hoa-don-giao-hang}">Đang Giao Hàng</a></li>
+
+						</ul> <!-- category submenu end--></li>
+				</ul>
+			</div>
+			<!-- category-menu-end -->
+		</div>
+
+	</div>
+</div>
+
+
+
+
+</html>

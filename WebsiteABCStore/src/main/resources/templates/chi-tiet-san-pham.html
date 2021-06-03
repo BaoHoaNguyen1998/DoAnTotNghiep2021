@@ -1,0 +1,249 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="utf-8">
+<title>ABC Store</title>
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+	<!-- Main Wrapper Start Here -->
+	<div class="wrapper">
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a th:href="@{/}">Trang Chủ</a></li>
+						<li><a th:href="@{/}">Shop</a></li>
+						<li class="active"><a th:href="@{/}">Chi Tiết Sản Phẩm</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+		<div th:if="${error!=null}">
+			<p th:text="${error}"></p>
+		</div>
+
+		<div class="main-product-thumbnail ptb-100 ptb-sm-60">
+			<div class="container">
+				<div class="thumb-bg">
+					<div class="row">
+						<!-- Main Thumbnail Image Start -->
+						<div class="col-lg-5 mb-all-40">
+							<!-- Thumbnail Large Image start -->
+							<div class="tab-content">
+								<div id="thumb1" class="tab-pane fade show active">
+									<a data-fancybox="images" th:href="${sanpham.hinhAnh}"><img
+										th:src="${sanpham.hinhAnh}" alt="product-view"></a>
+								</div>
+								<div id="thumb2" class="tab-pane fade">
+									<a data-fancybox="images" th:href="${sanpham.hinhAnh1}"><img
+										th:src="${sanpham.hinhAnh1}" alt="product-view"></a>
+								</div>
+								<div id="thumb3" class="tab-pane fade">
+									<a data-fancybox="images" th:href="${sanpham.hinhAnh2}"><img
+										th:src="${sanpham.hinhAnh2}" alt="product-view"></a>
+								</div>
+								<div id="thumb4" class="tab-pane fade">
+									<a data-fancybox="images" th:href="${sanpham.hinhAnh3}"><img
+										th:src="${sanpham.hinhAnh3}" alt="product-view"></a>
+								</div>
+
+							</div>
+							<!-- Thumbnail Large Image End -->
+							<!-- Thumbnail Image End -->
+							<div class="product-thumbnail mt-15">
+								<div class="thumb-menu owl-carousel nav tabs-area"
+									role="tablist">
+									<a class="active" data-toggle="tab" href="#thumb1"><img
+										style="height: 144px; width: 144px;"
+										th:src="${sanpham.hinhAnh}" alt="product-thumbnail"></a> <a
+										data-toggle="tab" href="#thumb2"><img
+										style="height: 144px; width: 144px;"
+										th:src="${sanpham.hinhAnh1}" alt="product-thumbnail"></a> <a
+										data-toggle="tab" href="#thumb3"><img
+										style="height: 144px; width: 144px;"
+										th:src="${sanpham.hinhAnh2}" alt="product-thumbnail"></a> <a
+										data-toggle="tab" href="#thumb4"><img
+										style="height: 144px; width: 144px;"
+										th:src="${sanpham.hinhAnh3}" alt="product-thumbnail"></a>
+								</div>
+							</div>
+							<!-- Thumbnail image end -->
+						</div>
+						<!-- Main Thumbnail Image End -->
+						<!-- Thumbnail Description Start -->
+						<div class="col-lg-7">
+							<div class="thubnail-desc fix">
+								<h3 class="product-header" th:text="${sanpham.tenSanPham}"></h3>
+								<div class="rating-summary fix mtb-10"></div>
+								<div class="pro-price mtb-30">
+									<p class="d-flex align-items-center">
+										<span class="price"
+											th:text="${#numbers.formatDecimal(sanpham.donGia ,0, 'COMMA', 0, 'POINT')+' đ'}"></span>
+									<p class="mb-20 pro-desc-details"
+										th:text="${'Số lượng bán: '+sanpham.soLuongBan}"></p>
+
+								</div>
+								<p class="mb-20 pro-desc-details" th:text="${sanpham.moTa}">
+								</p>
+								<p class="mb-20 pro-desc-details"
+									th:text="${'Thương Hiệu:'+sanpham.thuongHieu}" />
+								<p style="padding-bottom: 5px;">
+									Shop: <a style="color: red;"
+										th:href="@{/shop/{idshop}(idshop=${sanpham.nguoiDung.id})}"
+										th:text="${sanpham.nguoiDung.tenShop}"></a>
+								</p>
+
+								<div class="box-quantity d-flex hot-product2">
+									<input class="quantity mr-15" id="sl" style="height: 40px;"
+										th:max="${sanpham.soLuongKho} - ${sanpham.soLuongBan}"
+										type="number" name="sl" min="1" value="1"> <input
+										id="idsp" type="hidden" th:value="${sanpham.id}">
+									<div class="buttons-cart">
+										<input th:onclick="themSP()"
+											th:if="${sanpham.soLuongKho} - ${sanpham.soLuongBan} > 0"
+											type="submit" value="Thêm Vào Giỏ Hàng">
+									</div>
+								</div>
+								<div th:if="${sanpham.soLuongKho} - ${sanpham.soLuongBan} > 0"
+									class="pro-ref mt-20">
+									<p>
+										<span class="in-stock"><i class="ion-checkmark-round"></i>
+											Còn Hàng</span>
+									</p>
+								</div>
+								<div
+									th:unless="${sanpham.soLuongKho} - ${sanpham.soLuongBan} > 0"
+									class="pro-ref mt-20">
+									<p>
+										<span class="in-stock">&#x274C;
+											Hết Hàng </span>
+									</p>
+								</div>
+								<div class="pro-ref mt-20">
+									<p>
+										<span
+											th:text="${sanpham.soLuongKho} - ${sanpham.soLuongBan}+ ' Sản Phẩm'"
+											class="in-stock"><i class="ion-checkmark-round"></i> </span>
+									</p>
+								</div>
+								<div class="socila-sharing mt-25">
+									<ul class="d-flex">
+										<li>share</li>
+										<li><a href="#"><i class="fa fa-facebook"
+												aria-hidden="true"></i></a></li>
+										<li><a href="#"><i class="fa fa-twitter"
+												aria-hidden="true"></i></a></li>
+										<li><a href="#"><i class="fa fa-google-plus-official"
+												aria-hidden="true"></i></a></li>
+										<li><a href="#"><i class="fa fa-pinterest-p"
+												aria-hidden="true"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- Thumbnail Description End -->
+					</div>
+					<!-- Row End -->
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+		<div class="thumnail-desc pb-100 pb-sm-60">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<ul class="main-thumb-desc nav tabs-area" role="tablist">
+							<li><a class="active" data-toggle="tab" href="#dtail">Mô
+									Tả Chi Tiết Sản Phẩm</a></li>
+							<li><a data-toggle="tab" href="#review"
+								th:text="${'Đánh Giá '+ sanpham.danhGias.size()}"></a></li>
+						</ul>
+						<!-- Product Thumbnail Tab Content Start -->
+						<div class="tab-content thumb-content border-default">
+							<div id="dtail" class="tab-pane fade show active">
+								<p th:text="${sanpham.moTaChiTiet}"></p>
+							</div>
+							<div id="review" class="tab-pane fade">
+								<!-- Reviews Start -->
+
+								<div class="review border-default universal-padding">
+									<div class="group-title">
+										<h2>Người Dùng Đánh Giá</h2>
+									</div>
+									<th:block th:each="danhgia : ${sanpham.danhGias}">
+										<h4 style="color: orange;" class="review-mini-title"
+											th:text="${'Khách Hàng '+danhgia.nguoiDung.hoTen}"></h4>
+										<ul class="main-thumb-desc nav tabs-area" role="tablist">
+											<!-- Single Review List Start -->
+											<li><span style="color: blue;">Nội Dung</span></br> <label
+												th:text="${danhgia.noiDung}"></label> </br> <label
+												th:text="${'Thời Gian '+danhgia.ngayDanhGia}"></label></li>
+
+
+
+										</ul>
+									</th:block>
+								</div>
+
+								<!-- Reviews End -->
+								<!-- Reviews Start -->
+								<div class="review border-default universal-padding mt-30">
+									<h2 class="review-title mb-30">
+										Bạn Muốn Đánh Giá Sản Phẩm : <br> <span
+											th:text="${sanpham.tenSanPham}"></span>
+									</h2>
+
+									<div class="riview-field mt-40">
+										<form autocomplete="off"
+											th:action="@{/san-pham-danh-gia/{id}(id=${sanpham.id})}"
+											th:object="${danhgianew}" method="post">
+											<div class="form-group">
+												<label class="req" for="comments">Nội Dung</label>
+												<textarea th:field="*{noiDung}" class="form-control"
+													rows="5" id="comments" required="required"></textarea>
+											</div>
+											<input class="form-control" type="hidden"
+												th:field="*{sanPham}" th:value="*{sanPham}" />
+											<button type="submit" class="customer-btn">Gửi Đánh
+												Giá</button>
+										</form>
+									</div>
+									<!-- Reviews Field Start -->
+								</div>
+								<!-- Reviews End -->
+							</div>
+						</div>
+						<!-- Product Thumbnail Tab Content End -->
+					</div>
+				</div>
+				<!-- Row End -->
+			</div>
+			<!-- Container End -->
+		</div>
+
+
+
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+		
+	</div>
+
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+
+
+</body>
+
+</html>

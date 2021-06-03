@@ -1,0 +1,185 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Quản Lý - Tài Khoản || ABC Store</title>
+<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: header"></div>
+</head>
+<body>
+	<div class="container-scroller">
+		<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: navheader"></div>
+		<div class="container-fluid page-body-wrapper">
+			<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: navleft"></div>
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="row">
+						<div class="col-md-12">
+							<div
+								class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">
+								<ul class="nav nav-tabs tab-transparent" role="tablist">
+									<li class="nav-item"><a class="nav-link" id="home-tab"
+										data-toggle="tab" href="#" role="tab" aria-selected="true">Tài Khoản
+											</a></li>
+
+								</ul>
+
+							</div>
+							<div class="search-field d-none d-xl-block">
+								
+								<form class="d-flex align-items-center h-100" action="#">
+									<div class="input-group">
+										<div class="input-group-prepend bg-transparent">
+											<i class="input-group-text border-0 mdi mdi-magnify"></i>
+										</div>
+										<input type="text"
+											class="form-control bg-transparent border-0"
+											placeholder="Nhập Từ Khóa Tìm Kiếm...">
+									</div>
+								</form>
+							</div>
+							
+							<div  class="tab-content tab-transparent-content">
+								<div class="tab-pane fade show active" id="business-1"
+									role="tabpanel" aria-labelledby="business-tab">
+									<div class="col-lg-12 grid-margin stretch-card">
+										<div class="card">
+											<div class="card-body">
+												<h4 class="card-title">Thêm Tài Khoản Mới - Admin</h4>
+												
+												<p style="color: red;" th:text="${error}"></p>
+							
+											</div>
+						<form class="form-register" action="#" th:action="@{/quan-ly/tai-khoan/them-tai-khoan}"
+							th:object="${khachHang}" method="POST">
+							<fieldset>
+								<legend>Đăng ký</legend>
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="f-name"><span
+										class="require">*</span>Họ Và Tên</label>
+									<div class="col-md-10">
+										<input th:field="*{hoTen}" type="text"
+											class="form-control" placeholder="Nhập Họ và Tên của bạn"
+											required>
+									</div>
+								</div>
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="f-name"><span
+										class="require">*</span>Ngày Sinh</label>
+									<div class="col-md-10">
+										<input th:field="*{ngaySinh}" type="date"
+											class="form-control" 
+											required>
+									</div>
+								</div>
+
+								<div th:object="${lienHe}">
+									<div class="form-group d-md-flex align-items-md-center">
+
+										<label class="control-label col-md-2" for="number"><span
+											class="require">*</span>Số Điện Thoại</label>
+										<div class="col-md-10">
+											<input type="number" class="form-control"
+												placeholder="Nhập số điện thoại của bạn" name="sodienthoai"
+												th:field="*{soDienThoai}" required>
+										</div>
+									</div>
+									<div class="form-group d-md-flex align-items-md-center">
+										<label class="control-label col-md-2" for="diachi"><span
+											class="require">*</span>Địa Chỉ</label>
+										<div class="col-md-10">
+											<input type="text" class="form-control"
+												placeholder="Nhập địa chỉ của bạn" th:field="*{diaChi}"
+												required>
+										</div>
+									</div>
+
+								</div>
+
+							</fieldset>
+
+							<fieldset>
+								<legend>Tài Khoản Của Bạn</legend>
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="email"><span
+										class="require">*</span>Tên tài khoản Email</label>
+									<div class="col-md-10">
+										<input type="email" class="form-control"
+											placeholder="Nhập email của bạn"
+											th:field="*{taiKhoan.tenTaiKhoanEmail}" required id="email" onchange="checkEmail()">
+									</div>
+								</div>
+
+
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="pwd"><span
+										class="require">*</span>Password:</label>
+									<div class="col-md-10">
+										<input type="password" class="form-control" id="pwd1"
+											placeholder="Nhập mật khẩu của bạn"
+											th:field="*{taiKhoan.matKhau}" required>
+									</div>
+								</div>
+								<div class="form-group d-md-flex align-items-md-center">
+										<label class="control-label col-md-2" for="f-name"><span
+											class="require">*</span>Loại Tài Khoản</label>
+										<div class="col-md-10">
+											<div class="form-group">
+												<select class="form-control" name ="idLoai">
+													<option th:each="loaiTaiKhoan1 : ${dsLoaiTaiKhoan}"
+														th:text="${loaiTaiKhoan1.tenLoaiTaiKhoan}" th:value="${loaiTaiKhoan1.id}"></option>
+												</select>
+											</div>
+										</div>
+								</div>
+								
+							</fieldset>
+							<div class="terms">
+								<div class="float-md-right">
+									
+									<button class="return-customer-btn" type="submit" >Thêm Tài Khoản</button>
+								</div>
+							</div>
+						</form>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- content-wrapper ends -->
+				<!-- partial:partials/_footer.html -->
+				<footer class="footer">
+					<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: footer"></div>
+				</footer>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<div th:replace="/bocuc/bo-cuc-giao-dien-admin :: lib"></div>
+	<script type="text/javascript">
+		function btnSelete_Click() {
+			var strconfirm = confirm("Are you sure you want to delete?");
+			if (strconfirm == true) {
+				return true;
+			} else {
+				return false;
+			}
+
+		}
+	</script>
+
+
+
+</body>
+</html>

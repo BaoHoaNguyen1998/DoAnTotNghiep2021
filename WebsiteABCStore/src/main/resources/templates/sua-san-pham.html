@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	class="no-js" lang="zxx">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Bán Hàng - Sửa Sản Phẩm || ABC Store</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+
+	<div class="wrapper">
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+		<div class="breadcrumb-area mt-30">
+			<div class="container">
+				<div class="breadcrumb">
+					<ul class="d-flex align-items-center">
+						<li><a th:href=@{/}>Trang Chủ</a></li>
+						<li class="active"><a href="#">Sửa Sản Phẩm</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+
+		<!-- Register Account Start -->
+		<div class="register-account ptb-100 ptb-sm-60">
+			<div class="container">
+				<div class="row" style="margin-top: 30px"></div>
+				<div class="row">
+					<div th:replace="/bocuc/nav_left :: nav_left"></div>
+
+					<div class="col-sm-9">
+						<div class="register-title">
+							<h3 class="mb-10">Sửa Thông Tin Sản Phẩm</h3>
+							<p class="mb-10">Sửa thông tin sản phẩm mới cho shop của bạn</p>
+						</div>
+
+					</div>
+				</div>
+				<!-- Row End -->
+				<div class="row">
+
+					<div class="col-md-3"></div>
+
+					<div class="col-sm-8">
+						<form class="form-register" action="#" th:object="${sanPham}"
+							th:action="@{/ban-hang/sua-san-pham/{id} (id=${sanPham.id})}"
+							method="POST" enctype="multipart/form-data">
+							<fieldset>
+								<legend>Sữa Thông Tin Sản Phẩm</legend>
+								<div th:text="${tx}" style="font-size: 20px; color: orange;"></div>
+
+
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="f-name"><span
+										class="require">*</span>Tên Danh Mục Hien Tai</label>
+									<div class="col-md-3">
+										<span th:text="*{danhMuc.tenDanhMuc}"></span>
+									</div>
+
+									<label class="control-label col-md-2" for="f-name"><span
+										class="require">*</span>Tên Danh Mục Thay Đổi</label>
+									<div class="col-md-4">
+										<select class="form-control" th:field="*{danhMuc.id}">
+											<option th:each="danhMuc : ${listDanhMuc}"
+												th:text="${danhMuc.tenDanhMuc}" th:value="${danhMuc.id}"></option>
+
+										</select>
+									</div>
+
+
+								</div>
+
+
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="f-name"><span
+										class="require">*</span>Tên Sản Phẩm</label>
+									<div class="col-md-10">
+										<input th:field="*{tenSanPham}" type="text"
+											class="form-control" placeholder="Tên Sản Phẩm " required>
+									</div>
+								</div>
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="f-name"><span
+										class="require">*</span>Đơn Giá</label>
+									<div class="col-md-10">
+										<input th:field="*{donGia}" type="number" class="form-control"
+											placeholder="Đơn Giá " required>
+									</div>
+								</div>
+
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="f-name"><span
+										class="require">*</span>Số Lượng Kho</label>
+									<div class="col-md-10">
+										<input th:field="*{soLuongKho}" type="number"
+											class="form-control" placeholder="Số Lượng Kho " required>
+									</div>
+								</div>
+
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="f-name"><span
+										class="require">*</span>Mô Tả</label>
+									<div class="col-md-10">
+										<textarea th:field="*{moTa}" class="form-control"
+											placeholder="Mô Tả Sản Phẩm Của Bạn " required></textarea>
+									</div>
+								</div>
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="f-name"><span
+										class="require">*</span>Thương Hiệu</label>
+									<div class="col-md-10">
+										<input th:field="*{thuongHieu}" class="form-control"
+											placeholder="Thương Hiệu " required type="text" />
+									</div>
+								</div>
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="f-name"><span
+										class="require">*</span>Năm Sản Xuất</label>
+									<div class="col-md-10">
+										<input th:field="*{namSanXuat}" type="number"
+											class="form-control" placeholder="Mô Tả Sản Phẩm Của Bạn "
+											required />
+									</div>
+								</div>
+
+
+							</fieldset>
+
+							<fieldset>
+								<legend>Hình Ảnh</legend>
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2" for="email"><span
+										class="require">*</span>Ảnh Đại Diện Sản Phẩm</label>
+									<div class="col-md-5">
+										<input class="form-control"
+											placeholder="Hinh Anh Đại Diện Sản Phẩm" name="file"
+											type="file" onchange="show(this)" required="required" />
+									</div>
+
+									<img id="hinhAnh1" height="130" width="130"
+										style="border: solid" />
+								</div>
+
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2"><span
+										class="require">*</span>Ảnh Phụ 1</label>
+									<div class="col-md-6">
+										<input class="form-control"
+											placeholder="Hinh Anh Đại Diện Sản Phẩm" name="file1"
+											type="file" required="required" />
+									</div>
+								</div>
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2"><span
+										class="require">*</span>Ảnh Phụ 2</label>
+									<div class="col-md-6">
+										<input class="form-control"
+											placeholder="Hinh Anh Đại Diện Sản Phẩm" name="file2"
+											type="file" required="required" />
+									</div>
+								</div>
+								<div class="form-group d-md-flex align-items-md-center">
+									<label class="control-label col-md-2"><span
+										class="require">*</span>Ảnh Phụ 3</label>
+									<div class="col-md-6">
+										<input class="form-control"
+											placeholder="Hinh Anh Đại Diện Sản Phẩm" required="required"
+											name="file3" type="file" />
+									</div>
+								</div>
+
+
+
+							</fieldset>
+
+							<div class="terms">
+								<div class="float-md-right">
+
+									<button class="return-customer-btn" type="submit">Sữa
+										Sản Phẩm</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- Row End -->
+			</div>
+
+		</div>
+
+
+
+
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+	</div>
+
+	<script type="text/javascript">
+		function show(input) {
+			debugger;
+			var validExtensions = [ 'jpg', 'png', 'jpeg', 'JPG' ]; //array of valid extensions
+			var fileName = input.files[0].name;
+			var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+			if ($.inArray(fileNameExt, validExtensions) == -1) {
+				input.type = ''
+				input.type = 'file'
+				$('#hinhAnh1').attr('src', "");
+				alert("Only these file types are accepted : "
+						+ validExtensions.join(', '));
+			} else {
+				if (input.files && input.files[0]) {
+					var filerdr = new FileReader();
+					filerdr.onload = function(e) {
+						$('#hinhAnh1').attr('src', e.target.result);
+					}
+					filerdr.readAsDataURL(input.files[0]);
+				}
+			}
+		};
+		function show1(input) {
+			debugger;
+			var validExtensions = [ 'jpg', 'png', 'jpeg', 'JPG' ]; //array of valid extensions
+			var fileName = input.files[0].name;
+			var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+			if ($.inArray(fileNameExt, validExtensions) == -1) {
+				input.type = ''
+				input.type = 'file'
+				$('#hinhAnh').attr('src', "");
+				alert("Chỉ chấp nhận đuôi file là  : "
+						+ validExtensions.join(', '));
+			} else {
+				if (input.files && input.files[0]) {
+					var filerdr = new FileReader();
+					filerdr.onload = function(e) {
+						$('#hinhAnh').attr('src', e.target.result);
+					}
+					filerdr.readAsDataURL(input.files[0]);
+				}
+			}
+		}
+	</script>
+</body>
+
+</html>

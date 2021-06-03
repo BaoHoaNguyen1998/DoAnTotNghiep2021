@@ -1,0 +1,551 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title> ABC Store</title>
+<!-- Favicons -->
+<link rel="shortcut icon" href="/web/img/favicon.ico">
+<!-- Fontawesome css -->
+<div th:replace="/bocuc/bo-cuc-giao-dien :: header"></div>
+</head>
+
+<body>
+
+
+	<!-- Main Wrapper Start Here -->
+	<div class="wrapper">
+
+		<div th:replace="/bocuc/bo-cuc-giao-dien :: navbar"></div>
+
+		<div class="slider_box">
+			<div class="slider-wrapper theme-default">
+				<!-- Slider Background  Image Start-->
+				<div id="slider" class="nivoSlider">
+					<a href="shop.html"><img src="/web/img/slider/5.jpg"
+						data-thumb="/web/img/slider/5.jpg" alt="" title="#htmlcaption" /></a>
+					<a href="shop.html"><img src="/web/img/slider/6.jpg"
+						data-thumb="/web/img/slider/6.jpg" alt="" title="#htmlcaption2" /></a>
+				</div>
+				<!-- Slider Background  Image Start-->
+			</div>
+		</div>
+
+		<div class="image-banner pb-50 off-white-bg">
+			<div class="container">
+				<div class="col-img">
+					<a href="#"><img src="/web/img/banner/h1-banner.jpg"
+						alt="image banner"></a>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+
+		<div class="hot-deal-products off-white-bg pb-90 pb-sm-50">
+			<div class="container">
+				<!-- Product Title Start -->
+				<div class="post-title pb-30">
+					<h2 style="font-family: Georgia, 'Times New Roman', Times, serif">Sản Phẩm Bán Chạy</h2>
+				</div>
+				<!-- Product Title End -->
+				<!-- Hot Deal Product Activation Start -->
+				<div class="hot-deal-active owl-carousel">
+
+					<th:block th:each="sanpham : ${listSanPhamSLBan}">
+						<div class="single-product">
+							<!-- Product Image Start -->
+							<div class="pro-img">
+								<a th:href="@{/{id}(id=${sanpham.id})}"> <img  
+									class="primary-img" th:src="${sanpham.hinhAnh}"
+									alt="single-product"> <img   class="secondary-img"
+									th:src="${sanpham.hinhAnh1}" alt="single-product">
+								</a>
+							</div>
+							<!-- Product Image End -->
+							<!-- Product Content Start -->
+							<div class="pro-content">
+								<h4>
+									<a th:href="@{/{id}(id=${sanpham.id})}"
+										th:text="${sanpham.tenSanPham}"></a>
+								</h4>
+								<p>
+									<span class="price"
+										th:text="${#numbers.formatDecimal(sanpham.donGia,0, 'COMMA', 0, 'POINT')+' đ'}"></span>
+									<del class="prev-price"
+										th:text="${#numbers.formatDecimal(sanpham.donGia  ,0, 'COMMA', 0, 'POINT')+' đ'}"></del>
+								</p>
+
+								<div class="label-product ">
+									<i style="font-size: 11px;">Số lượng bán</i> <span
+										class="symbol-percent" th:text="${sanpham.soLuongBan}"></span>
+								</div>
+								<div class="pro-actions">
+									<div class="actions-primary">
+										<a th:href="@{/{id}(id=${sanpham.id})}"
+											title="Xem Chi Tiết Sản Phẩm">Xem Chi Tiết Sản Phẩm</a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</th:block>
+
+					<!-- Single Product End -->
+				</div>
+				<!-- Hot Deal Product Active End -->
+
+			</div>
+			<!-- Container End -->
+		</div>
+
+		<div class="big-banner mt-100 pb-85 mt-sm-60 pb-sm-45">
+			<div class="container banner-2">
+				<div class="banner-box">
+					<div class="col-img">
+						<a href="#"><img src="/web/img/banner/banner3-1.jpg"
+							alt="banner 3"></a>
+					</div>
+					<div class="col-img">
+						<a href="#"><img src="/web/img/banner/banner3-2.jpg"
+							alt="banner 3"></a>
+					</div>
+				</div>
+				<div class="banner-box">
+					<div class="col-img">
+						<a href="#"><img src="/web/img/banner/banner3-3.jpg"
+							alt="banner 3"></a>
+					</div>
+				</div>
+				<div class="banner-box">
+					<div class="col-img">
+						<a href="#"><img src="/web/img/banner/banner3-4.jpg"
+							alt="banner 3"></a>
+					</div>
+					<div class="col-img">
+						<a href="#"><img src="/web/img/banner/banner3-5.jpg"
+							alt="banner 3"></a>
+					</div>
+				</div>
+				<div class="banner-box">
+					<div class="col-img">
+						<a href="#"><img src="/web/img/banner/banner3-6.jpg"
+							alt="banner 3"></a>
+					</div>
+				</div>
+				<div class="banner-box">
+					<div class="col-img">
+						<a href="#"><img src="/web/img/banner/banner3-7.jpg"
+							alt="banner 3"></a>
+					</div>
+					<div class="col-img">
+						<a href="#"><img src="/web/img/banner/banner3-8.jpg"
+							alt="banner 3"></a>
+					</div>
+				</div>
+			</div>
+			<!-- Container End -->
+		</div>
+		<div class="like-product ptb-40 off-white-bg pt-sm-20 pb-sm-20 ">
+			<div class="container">
+				<div class="like-product-area">
+					<h2 class="section-ttitle2 mb-30">Sản Phẩm Mới</h2>
+					<!-- Arrivals Product Activation Start Here -->
+					<div class="like-pro-active owl-carousel">
+						<th:block th:each="sanpham : ${listSanPhamSPMoi}">
+							<div class="double-product">
+
+								<div class="single-product">
+									<!-- Product Image Start -->
+									<div class="pro-img">
+										<a th:href="@{/{id}(id=${sanpham.id})}"> <img  
+											class="primary-img" th:src="${sanpham.hinhAnh}"
+											alt="single-product"> <img class="secondary-img"	 
+											th:src="${sanpham.hinhAnh1}" alt="single-product">
+										</a>
+									</div>
+									<!-- Product Image End -->
+									<!-- Product Content Start -->
+									<div class="pro-content">
+										<h4>
+											<a th:href="@{/{id}(id=${sanpham.id})}"
+												th:text="${sanpham.tenSanPham}"></a>
+										</h4>
+										<p>
+											<span class="price"
+												th:text="${#numbers.formatDecimal(sanpham.donGia,0, 'COMMA', 0, 'POINT')+' đ'}"></span>
+											<del class="prev-price"
+												th:text="${#numbers.formatDecimal(sanpham.donGia  ,0, 'COMMA', 0, 'POINT')+' đ'}"></del>
+										</p>
+
+										<div>
+											<i style="font-size: 11px;">Số lượng bán</i> <span
+												class="symbol-percent" th:text="${sanpham.soLuongBan}"></span>
+										</div>
+										<div class="pro-actions">
+											<div class="actions-primary">
+												<a th:href="@{/{id}(id=${sanpham.id})}"
+													title="Xem Chi Tiết Sản Phẩm">Xem Chi Tiết Sản Phẩm</a>
+											</div>
+
+										</div>
+									</div>
+									<span class="sticker-new">mới</span>
+								</div>
+								<!-- Single Product End -->
+
+							</div>
+						</th:block>
+						<!-- Double Product End -->
+					</div>
+
+					<!-- Arrivals Product Activation End Here -->
+				</div>
+				<!-- main-product-tab-area-->
+			</div>
+			<!-- Container End -->
+		</div>
+
+		<div class="like-product ptb-70 off-white-bg pt-sm-30 pb-sm-45 ">
+			<div class="container">
+				<h2 class="section-ttitle2 mb-30">Sản Phẩm Dành Cho Bạn</h2>
+				<div class="col-lg-12 order-1 order-lg-2">
+					<!-- Grid & List View Start -->
+					<div
+						class="grid-list-top border-default universal-padding d-md-flex justify-content-md-between align-items-center mb-30">
+						<div class="grid-list-view  mb-sm-15">
+							<ul class="nav tabs-area d-flex align-items-center">
+								<li><a class="active" data-toggle="tab" href="#grid-view"><i
+										class="fa fa-th"></i></a></li>
+								<li><a data-toggle="tab" href="#list-view"><i
+										class="fa fa-list-ul"></i></a></li>
+							</ul>
+						</div>
+						<!-- Toolbar Short Area Start -->
+						<div class="main-toolbar-sorter clearfix">
+							<div class="toolbar-sorter d-flex align-items-center">
+									<label>Sắp Xếp:</label> <select class="sorter wide">
+										<option value="Position">Mặc Định</option>
+										<option value="Product Name">Tên Sản Phẩm, A to Z</option>
+										<option value="Product Name">Tên Sản Phẩm, Z to A</option>
+										<option value="Price">Giá Sản Phẩm Từ Cao Đến Thấp</option>
+										<option value="Price">Giá Sản Phẩm Từ Thấp Đến Cao</option>
+									</select>
+								</div>
+						</div>
+						<!-- Toolbar Short Area End -->
+						<!-- Toolbar Short Area Start -->
+						<div class="main-toolbar-sorter clearfix">
+							<div class="toolbar-sorter d-flex align-items-center">
+								<label>Hiển Thị:</label> <select class="sorter wide">
+									<option value="12">12</option>
+									<option value="25">25</option>
+									<option value="50">50</option>
+									<option value="75">75</option>
+									<option value="100">100</option>
+								</select>
+							</div>
+						</div>
+						<!-- Toolbar Short Area End -->
+					</div>
+					<!-- Grid & List View End -->
+					<div class="main-categorie mb-all-40">
+						<!-- Grid & List Main Area End -->
+						<div class="tab-content fix">
+						
+							<div id="grid-view" class="tab-pane fade show active">
+								<div class="row">
+									<!-- Single Product Start -->
+
+									<th:block th:each="sanpham : ${listSanPham}">
+										<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+											<div class="single-product">
+												<!-- Product Image Start -->
+												<div class="pro-img">
+													<a th:href="@{/{id}(id=${sanpham.id})}"> <img style="width: 260px;"
+														class="primary-img" th:src="${sanpham.hinhAnh}"
+														alt="single-product"> <img class="secondary-img"
+														th:src="${sanpham.hinhAnh1}" alt="single-product">
+													</a>
+												</div>
+												<!-- Product Image End -->
+												<!-- Product Content Start -->
+												<div class="pro-content">
+													<h4>
+														<a th:href="@{/{id}(id=${sanpham.id})}"
+															th:text="${sanpham.tenSanPham}"></a>
+													</h4>
+													<p>
+														<span class="price"
+															th:text="${#numbers.formatDecimal(sanpham.donGia,0, 'COMMA', 0, 'POINT')+' đ'}"></span>
+														<del class="prev-price"
+															th:text="${#numbers.formatDecimal(sanpham.donGia  ,0, 'COMMA', 0, 'POINT')+' đ'}"></del>
+													</p>
+
+													<div class="label-product ">
+														<i style="font-size: 11px;">Số lượng bán</i> <span
+															class="symbol-percent" th:text="${sanpham.soLuongBan}"></span>
+													</div>
+													<div class="pro-actions">
+														<div class="actions-primary">
+															<a th:href="@{/{id}(id=${sanpham.id})}"
+																title="Xem Chi Tiết Sản Phẩm">Xem Chi Tiết Sản Phẩm</a>
+														</div>
+
+													</div>
+												</div>
+											</div>
+										</div>
+										</th:block>
+									
+
+
+								</div>
+								<!-- #list view End -->
+								
+								<!-- Product Pagination Info -->
+							</div>
+							
+							<div id="list-view" class="tab-pane fade" >
+							<th:block th:each="sanpham : ${listSanPham}">
+									<div class="single-product" >
+										<div  class="row" style="padding: 10px;">
+											<!-- Product Image Start -->
+											
+											<div class="col-lg-4 col-md-5 col-sm-12">
+												<div class="pro-img">
+														<a th:href="@{/{id}(id=${sanpham.id})}"> <img 
+															class="primary-img" th:src="${sanpham.hinhAnh}"
+															alt="single-product"> <img class="secondary-img"
+															th:src="${sanpham.hinhAnh1}" alt="single-product">
+														</a>
+													</div>
+											</div>
+											<!-- Product Image End -->
+											<!-- Product Content Start -->
+											<div class="col-lg-8 col-md-7 col-sm-12">
+												<div  class="pro-content hot-product2">
+													<h4>
+															<a th:href="@{/{id}(id=${sanpham.id})}"
+																th:text="${sanpham.tenSanPham}"></a>
+													</h4>
+													<p>
+															<span class="price"
+																th:text="${#numbers.formatDecimal(sanpham.donGia,0, 'COMMA', 0, 'POINT')+' đ'}"></span>
+															<del class="prev-price"
+																th:text="${#numbers.formatDecimal(sanpham.donGia  ,0, 'COMMA', 0, 'POINT')+' đ'}"></del>
+														</p>
+													<p th:text="${sanpham.moTaChiTiet}"></p>
+													<div class="label-product ">
+															<p>Số lượng bán</p> <span
+																class="symbol-percent" th:text="${sanpham.soLuongBan}"></span>
+														</div>
+													<div class="pro-actions">
+														<div class="actions-primary">
+															<a th:href="@{/{id}(id=${sanpham.id})}"
+																title="Xem Chi Tiết Sản Phẩm">Xem Chi Tiết Sản Phẩm</a>
+														</div>
+
+													</div>
+												</div>
+											</div>
+											<!-- Product Content End -->
+										</div>
+									</div>
+									</th:block>
+								</div>
+								
+							<!-- Grid & List Main Area End -->
+						</div>
+					</div>
+					<a class="xem-them" th:href="@{/san-pham-danh-cho-ban}">Xem Thêm</a>
+				</div>
+			</div>
+
+		</div>
+		
+		<div class="like-product ptb-70 off-white-bg pt-sm-30 pb-sm-45 ">
+			<div class="container">
+				<h2 class="section-ttitle2 mb-30">Sản Phẩm Theo Danh Mục</h2>
+				<div class="col-lg-12 order-1 order-lg-2">
+					<!-- Grid & List View Start -->
+					<div
+						class="grid-list-top border-default universal-padding d-md-flex justify-content-md-between align-items-center mb-30">
+						<div class="grid-list-view  mb-sm-15">
+							<ul class="nav tabs-area d-flex align-items-center">
+								<li><a class="active" data-toggle="tab" href="#grid-view"><i
+										class="fa fa-th"></i></a></li>
+								<li><a data-toggle="tab" href="#list-view"><i
+										class="fa fa-list-ul"></i></a></li>
+							</ul>
+						</div>
+						<!-- Toolbar Short Area Start -->
+						<div class="main-toolbar-sorter clearfix">
+							<div class="toolbar-sorter d-flex align-items-center">
+									<label>Sắp Xếp:</label> <select class="sorter wide">
+										<option value="Position">Mặc Định</option>
+										<option value="Product Name">Tên Sản Phẩm, A to Z</option>
+										<option value="Product Name">Tên Sản Phẩm, Z to A</option>
+										<option value="Price">Giá Sản Phẩm Từ Cao Đến Thấp</option>
+										<option value="Price">Giá Sản Phẩm Từ Thấp Đến Cao</option>
+									</select>
+								</div>
+						</div>
+						<!-- Toolbar Short Area End -->
+						<!-- Toolbar Short Area Start -->
+						<div class="main-toolbar-sorter clearfix">
+							<div class="toolbar-sorter d-flex align-items-center">
+								<label>Hiển Thị:</label> <select class="sorter wide">
+									<option value="12">12</option>
+									<option value="25">25</option>
+									<option value="50">50</option>
+									<option value="75">75</option>
+									<option value="100">100</option>
+								</select>
+							</div>
+						</div>
+						<!-- Toolbar Short Area End -->
+					</div>
+					<!-- Grid & List View End -->
+					<div class="main-categorie mb-all-40">
+						<!-- Grid & List Main Area End -->
+						<div class="tab-content fix">
+						
+							<div id="grid-view" class="tab-pane fade show active">
+								<div class="row">
+									<!-- Single Product Start -->
+
+									<th:block th:each="sanpham : ${listSanPham}">
+										<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+											<div class="single-product">
+												<!-- Product Image Start -->
+												<div class="pro-img">
+													<a th:href="@{/{id}(id=${sanpham.id})}"> <img style="width: 260px;"
+														class="primary-img" th:src="${sanpham.hinhAnh}"
+														alt="single-product"> <img class="secondary-img"
+														th:src="${sanpham.hinhAnh1}" alt="single-product">
+													</a>
+												</div>
+												<!-- Product Image End -->
+												<!-- Product Content Start -->
+												<div class="pro-content">
+													<h4>
+														<a th:href="@{/{id}(id=${sanpham.id})}"
+															th:text="${sanpham.tenSanPham}"></a>
+													</h4>
+													<p>
+														<span class="price"
+															th:text="${#numbers.formatDecimal(sanpham.donGia,0, 'COMMA', 0, 'POINT')+' đ'}"></span>
+														<del class="prev-price"
+															th:text="${#numbers.formatDecimal(sanpham.donGia  ,0, 'COMMA', 0, 'POINT')+' đ'}"></del>
+													</p>
+
+													<div class="label-product ">
+														<i style="font-size: 11px;">Số lượng bán</i> <span
+															class="symbol-percent" th:text="${sanpham.soLuongBan}"></span>
+													</div>
+													<div class="pro-actions">
+														<div class="actions-primary">
+															<a th:href="@{/{id}(id=${sanpham.id})}"
+																title="Xem Chi Tiết Sản Phẩm">Xem Chi Tiết Sản Phẩm</a>
+														</div>
+
+													</div>
+												</div>
+											</div>
+										</div>
+										</th:block>
+									
+
+
+								</div>
+								<!-- #list view End -->
+								
+								<!-- Product Pagination Info -->
+							</div>
+							
+							<div id="list-view" class="tab-pane fade" >
+							<th:block th:each="sanpham : ${listSanPham}">
+									<div class="single-product" >
+										<div  class="row" style="padding: 10px;">
+											<!-- Product Image Start -->
+											
+											<div class="col-lg-4 col-md-5 col-sm-12">
+												<div class="pro-img">
+														<a th:href="@{/{id}(id=${sanpham.id})}"> <img 
+															class="primary-img" th:src="${sanpham.hinhAnh}"
+															alt="single-product"> <img class="secondary-img"
+															th:src="${sanpham.hinhAnh1}" alt="single-product">
+														</a>
+													</div>
+											</div>
+											<!-- Product Image End -->
+											<!-- Product Content Start -->
+											<div class="col-lg-8 col-md-7 col-sm-12">
+												<div  class="pro-content hot-product2">
+													<h4>
+															<a th:href="@{/{id}(id=${sanpham.id})}"
+																th:text="${sanpham.tenSanPham}"></a>
+													</h4>
+													<p>
+															<span class="price"
+																th:text="${#numbers.formatDecimal(sanpham.donGia,0, 'COMMA', 0, 'POINT')+' đ'}"></span>
+															<del class="prev-price"
+																th:text="${#numbers.formatDecimal(sanpham.donGia  ,0, 'COMMA', 0, 'POINT')+' đ'}"></del>
+														</p>
+													<p th:text="${sanpham.moTaChiTiet}"></p>
+													<div class="label-product ">
+															<p>Số lượng bán</p> <span
+																class="symbol-percent" th:text="${sanpham.soLuongBan}"></span>
+														</div>
+													<div class="pro-actions">
+														<div class="actions-primary">
+															<a th:href="@{/{id}(id=${sanpham.id})}"
+																title="Xem Chi Tiết Sản Phẩm">Xem Chi Tiết Sản Phẩm</a>
+														</div>
+
+													</div>
+												</div>
+											</div>
+											<!-- Product Content End -->
+										</div>
+									</div>
+									</th:block>
+								</div>
+								
+							<!-- Grid & List Main Area End -->
+						</div>
+					</div>
+					<a class="xem-them" th:href="@{/san-pham-danh-cho-ban}">Xem Thêm</a>
+				</div>
+			</div>
+
+		</div>
+		
+		
+
+		<!-- Container End -->
+	</div>
+	<div class="big-banner pb-110 pb-md-120">
+		<div class="container big-banner-box">
+			<div class="col-lg-7">
+				<a href="#"> <img src="/web/img/banner/5.jpg" alt="">
+				</a>
+			</div>
+			<div class="col-lg-5">
+				<a href="#"> <img src="/web/img/banner/h1-banner3.jpg" alt="">
+				</a>
+			</div>
+		</div>
+		<!-- Container End -->
+	</div>
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: footer"></div>
+
+	<!-- Main Wrapper End Here -->
+
+	<div th:replace="/bocuc/bo-cuc-giao-dien :: lib"></div>
+</body>
+
+</html>
